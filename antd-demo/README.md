@@ -66,3 +66,25 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### 按需加载antd组件样式配置在packag.json
+`
+    "babel": {
+        "presets": [
+            "react-app"
+        ],
+        "plugins": [
+            [
+                "import",
+                {
+                    "libraryName": "antd",
+                    "style": true
+                }
+            ]
+        ]
+    }
+`
+
+### less配置在webpack.config.js
+`getStyleLoaders 方法添加第三个参数`
+

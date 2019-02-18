@@ -1,9 +1,10 @@
 import React from 'react';
-import { Row, Col } from 'antd'
+import { Row, Col } from 'antd';
+
 import Header from './components/Header/index'
 import Footer from './components/Footer/index'
 import NavLeft from './components/NavLeft/index'
-import Home from './pages/home/index'
+// import Home from './pages/home/index'
 
 export default class Admin extends React.Component {
     constructor(props) {
@@ -24,7 +25,8 @@ export default class Admin extends React.Component {
                         
                         <Header></Header>
                         <Row className="content">
-                            <Home></Home>
+                            {/* <Home></Home> */}
+                            {this.props.children}
                         </Row>
                         <Footer></Footer>
 

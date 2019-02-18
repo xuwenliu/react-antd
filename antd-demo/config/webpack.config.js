@@ -444,7 +444,7 @@ module.exports = function (webpackEnv) {
                                 //配置antd主题色
                                 {
                                     modifyVars: {
-                                        "@primary-color": "#f9c700"
+                                        "@primary-color": "#1890ff"
                                     },
                                     javascriptEnabled: true,
                                 }
