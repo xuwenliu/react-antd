@@ -8,6 +8,7 @@ import Buttons from './pages/ui/Buttons';
 import Modals from './pages/ui/Modals';
 import Loadings from './pages/ui/Loadings';
 import Notification from './pages/ui/Notification';
+import Messages from './pages/ui/Messages';
 
 
 export default class ERouter extends React.Component{
@@ -25,6 +26,7 @@ export default class ERouter extends React.Component{
                                     <Route path="/ui/modals" component={Modals}></Route>
                                     <Route path="/ui/loadings" component={Loadings}></Route>
                                     <Route path="/ui/notification" component={Notification}></Route>
+                                    <Route path="/ui/messages" component={Messages}></Route>
                                     <Redirect to="/home" />
                                 </Switch>
                             </Admin>
