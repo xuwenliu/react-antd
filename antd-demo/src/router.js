@@ -6,6 +6,7 @@ import Admin from './Admin';
 import Home from './pages/home';
 import Buttons from './pages/ui/Buttons';
 import Modals from './pages/ui/Modals';
+import Loadings from './pages/ui/Loadings';
 
 
 export default class ERouter extends React.Component{
@@ -21,6 +22,7 @@ export default class ERouter extends React.Component{
                                     <Route path="/home" component={Home}></Route>
                                     <Route path="/ui/buttons" component={Buttons}></Route>
                                     <Route path="/ui/modals" component={Modals}></Route>
+                                    <Route path="/ui/loadings" component={Loadings}></Route>
                                     <Redirect to="/home" />
                                 </Switch>
                             </Admin>
