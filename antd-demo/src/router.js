@@ -12,6 +12,8 @@ import Messages from './pages/ui/Messages';
 import Tabpages from './pages/ui/Tabs';
 import Gallery from './pages/ui/Gallery';
 import Carousels from './pages/ui/Carousels';
+import Login from './pages/form/Login';
+import Register from './pages/form/Register';
 
 
 export default class ERouter extends React.Component{
@@ -33,6 +35,8 @@ export default class ERouter extends React.Component{
                                     <Route path="/ui/tabs" component={Tabpages}></Route>
                                     <Route path="/ui/gallery" component={Gallery}></Route>
                                     <Route path="/ui/carousel" component={Carousels}></Route>
+                                    <Route path="/form/login" component={Login}></Route>
+                                    <Route path="/form/register" component={Register}></Route>
                                     <Redirect to="/home" />
                                 </Switch>
                             </Admin>

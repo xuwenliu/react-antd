@@ -27,7 +27,9 @@ export default class Gallery extends React.Component {
         ]
         const imgList = imgs.map((list)=>
             list.map(item=>
-                <Card style={{marginBottom:10}}
+                <Card
+                    key={item}
+                    style={{ marginBottom: 10 }}
                     cover={<img alt={item} src={'/assets/img/gallery/' + item} />}
                     onClick={()=>this.openGallery(item)}
                    
@@ -44,7 +46,7 @@ export default class Gallery extends React.Component {
                 <Row gutter={10}>
                     {
                         imgList.map((item,index) =>
-                            <Col md={index === imgList.length-1?4:5}>{item}</Col>
+                            <Col key={index} md={index === imgList.length-1?4:5}>{item}</Col>
                         )
                     }
                     {/* <Col md={5}></Col>
