@@ -17,7 +17,7 @@ class Register extends React.Component {
         // let values = this.props.form.getFieldsValue();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log(values);
+                console.log(JSON.stringify(values,null,2));
                 message.success(`恭喜${values.userName}注册成功，密码：${values.password}`)
             }
         })

@@ -14,6 +14,7 @@ import Gallery from './pages/ui/Gallery';
 import Carousels from './pages/ui/Carousels';
 import Login from './pages/form/Login';
 import Register from './pages/form/Register';
+import BasicTable from './pages/table/BasicTable';
 
 
 export default class ERouter extends React.Component{
@@ -37,6 +38,9 @@ export default class ERouter extends React.Component{
                                     <Route path="/ui/carousel" component={Carousels}></Route>
                                     <Route path="/form/login" component={Login}></Route>
                                     <Route path="/form/register" component={Register}></Route>
+                                    <Route path="/table/basic" component={BasicTable}></Route>
+
+                                    
                                     <Redirect to="/home" />
                                 </Switch>
                             </Admin>

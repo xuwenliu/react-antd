@@ -1,3 +1,5 @@
+import React from 'react';
+import {Button} from 'antd';
 const filterDate = (date, fmt = 'YYYY-MM-DD HH:mm:ss') => {
     if (!date) {
         return '';
@@ -38,6 +40,39 @@ const filterDate = (date, fmt = 'YYYY-MM-DD HH:mm:ss') => {
     return fmt
 }
 
+const pagination = (data,pageOrPageSizeChange) =>{
+    return {
+        //这里page和pageSize 的回调是同一个函数处理
+        //page 变化的回调 参数是改变后的页码page及每页条数pageSize
+        onChange:(currentPage,currentPageSize)=>{
+            pageOrPageSizeChange(currentPage,currentPageSize)
+        },
+        //pageSize 变化的回调
+        onShowSizeChange: (currentPage,currentPageSize) => {
+            pageOrPageSizeChange(currentPage,currentPageSize);
+        },
+        // itemRender:(current, type, originalElement)=> {
+        //     console.log(type)
+        //     if (type === 'prev') {
+        //       return (<Button size="small" style={{marginRight:10}}>上一页</Button>);
+        //     } if (type === 'next') {
+        //       return (<Button size="small" style={{marginRight:10}}>下一页</Button>);
+        //     }
+        //     return originalElement;
+        // },
+        current:data.result.page,
+        pageSize:data.result.pageSize,
+        total: data.result.totalCount,
+        showTotal:()=>{
+            return `${data.result.pageSize}/${data.result.totalCount}条`
+        },
+        showQuickJumper: true,
+        showSizeChanger: true,//是否可以改变 pageSize
+        pageSizeOptions:['10','20','50','100','200','500','1000']
+    }
+}
+
 export default {
-    filterDate
+    filterDate,
+    pagination
 }
