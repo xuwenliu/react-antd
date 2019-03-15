@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Table, Avatar,Badge,Tooltip, Button,Radio }from 'antd';
+import { Card, Table, Avatar,Badge,Tooltip, Button,Radio,Modal,notification }from 'antd';
 import moment from 'moment';
 import axios from './../../axios/index';
 import Utils from './../../utils/utils';
@@ -25,6 +25,25 @@ export default class BasicTable extends React.Component {
             actionMode: e.target.value,
             selectedRowKeys: [],//单选和多选切换时将之前选中的清空
             loading: false,
+        })
+    }
+
+    //删除
+    handleDelete = () => {
+        Modal.confirm({
+            title: '删除提示',
+            content: '确定删除所选用户？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk:()=> {
+                console.log(this.state.selectedRowKeys);
+                console.log(this.state.dataSource);
+                notification.success({
+                    message: '提示',
+                    description: '删除成功！',
+                    duration:3,//3s自动关闭 默认4.5s，设置为null不关闭
+                })
+            },
         })
     }
 
@@ -220,6 +239,7 @@ export default class BasicTable extends React.Component {
                                 type="danger"
                                 disabled={!hasSelected}
                                 loading={loading}
+                                onClick={this.handleDelete}
                             
                             >删除</Button>
                             <span style={{ marginLeft: 8 }}>

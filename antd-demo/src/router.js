@@ -15,7 +15,7 @@ import Carousels from './pages/ui/Carousels';
 import Login from './pages/form/Login';
 import Register from './pages/form/Register';
 import BasicTable from './pages/table/BasicTable';
-
+import ReduxDemo from './pages/reduxdemo/reduxdemo'
 
 export default class ERouter extends React.Component{
     render(){
@@ -39,6 +39,7 @@ export default class ERouter extends React.Component{
                                     <Route path="/form/login" component={Login}></Route>
                                     <Route path="/form/register" component={Register}></Route>
                                     <Route path="/table/basic" component={BasicTable}></Route>
+                                    <Route path="/reduxdemo" component={ReduxDemo}></Route>
 
                                     
                                     <Redirect to="/home" />
