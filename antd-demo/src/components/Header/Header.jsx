@@ -1,8 +1,9 @@
 import React from 'react';
 import { Row, Col} from 'antd'
-import './index.less'
+import './header.less'
 import Util from '../../utils/utils'
-import axios from '../../axios/'
+import axios from '../../axios'
+import store from '../../pages/reduxdemo/store/store';
 
 
 
@@ -11,8 +12,12 @@ export default class Header extends React.Component {
         super(props);
         this.state = {
             userName: '',
-            date: Util.filterDate(new Date())
+            date: Util.filterDate(new Date()),
+            title:store.getState().titleReducers.title
         }
+        store.subscribe(() => {
+            this.setState(store.getState().titleReducers);
+        })
     }
     //组件即将挂载-->render函数还未执行
     componentWillMount() {
@@ -52,7 +57,7 @@ export default class Header extends React.Component {
                 </Row>
                 <Row className="breadcrumb">
                     <Col span={4} className="breadcrumb-title">
-                        首页
+                        {this.state.title}
                     </Col>
                     <Col span={20} className="weather">
                         <span className="date">{this.state.date}</span>
@@ -70,38 +75,4 @@ export default class Header extends React.Component {
             </div>
         )
     }
-
-    
-
-    //组件已经挂载好了-->render函数执行完毕--->用的最多-常用来发起Ajax请求
-    componentDidMount() {
-
-    }
-
-    //props变化了-->接受到了新的props
-    componentWillReceiveProps(nextProps) {
-
-    }
-
-    //props或者state变化了-->接受到了新的props或者state
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
-    }
-
-    //即将更新-->render函数还未执行
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
-    //更新完毕-->render函数执行完毕
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
-    //销毁之前
-    componentWillUnMount() {
-
-    }
-
-
 }

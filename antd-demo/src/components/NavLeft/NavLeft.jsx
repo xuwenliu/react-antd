@@ -2,7 +2,10 @@ import React from 'react';
 import MenuConfig from '../../config/menuConfig';
 import { Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
-import './index.less'
+import './navLeft.less'
+import store from '../../pages/reduxdemo/store/store';
+import getAction from '../../pages/reduxdemo/actionCreators/getAction';
+
 
 const SubMenu = Menu.SubMenu;
 
@@ -11,7 +14,8 @@ export default class NavLeft extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            menuList: []
+            menuList: [],
+            currentKey:'',
         }
     }
 
@@ -21,7 +25,25 @@ export default class NavLeft extends React.Component {
         this.setState({
             menuTreeNode
         })
+
     }
+    componentDidMount() {
+        store.dispatch(getAction.getIndexTitleAction('首页'));
+    }
+
+    handleClick = ({item,key})=>{
+        console.log(item)
+        console.log(key)
+        if (key === this.state.currentKey) {
+            return false;
+        }
+        this.setState(()=>{
+            return {
+                currentKey:key
+            }
+        })
+        store.dispatch(getAction.getIndexTitleAction(item.props.title));
+    }   
 
     //菜单渲染
     renderMenu = (data) => {
@@ -48,43 +70,12 @@ export default class NavLeft extends React.Component {
                     <img src="/assets/img/logo-ant.svg" alt="" />
                     <h1>Imooc MS</h1>
                 </div>
-                <Menu theme='dark'>
+                <Menu 
+                    onClick={this.handleClick}
+                    theme='dark'>
                     {this.state.menuTreeNode}
                 </Menu>
             </div>
         )
     }
-
-
-    //组件已经挂载好了-->render函数执行完毕--->用的最多-常用来发起Ajax请求
-    componentDidMount() {
-
-    }
-
-    //props变化了-->接受到了新的props
-    componentWillReceiveProps(nextProps) {
-
-    }
-
-    //props或者state变化了-->接受到了新的props或者state
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
-    }
-
-    //即将更新-->render函数还未执行
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
-    //更新完毕-->render函数执行完毕
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
-    //销毁之前
-    componentWillUnMount() {
-
-    }
-
-
 }

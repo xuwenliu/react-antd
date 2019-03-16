@@ -9,23 +9,26 @@ export default class Name extends React.Component {
         this.state = {
         }
         store.subscribe(() => {
-            this.setState(store.getState())
+            this.setState(store.getState().todoListReducers)
         });
     }
 
     handleInputChange = (e) => {
+        console.log(store.getState().todoListReducers)
         store.dispatch(getAction.getInputChangeAction(e.target.value));
     }
     handleBtnAdd = () => {
-        store.dispatch(getAction.getTodoItemAddAction())
+        if (this.state.inputVal) {
+            store.dispatch(getAction.getTodoItemAddAction());
+        }
     }
     handleItemDelete = (index) => {
-        store.dispatch(getAction.getTodoItemDeleteAction(index))
+        store.dispatch(getAction.getTodoItemDeleteAction(index));
 
     }
   
     componentDidMount() {
-        this.setState(store.getState())
+        this.setState(store.getState().todoListReducers);
     }
 
     render() {

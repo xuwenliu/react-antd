@@ -19,6 +19,12 @@ const getAction = {
             type: ACTION_TYPES.TODOLIST_TODO_ITEM_DELETE,
             index
         }
+    }),
+    getIndexTitleAction: ((title) => {
+        return {
+            type: ACTION_TYPES.INDEX_TITLE,
+            title
+        }
     })
 
 }

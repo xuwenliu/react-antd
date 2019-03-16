@@ -15,7 +15,8 @@ import Carousels from './pages/ui/Carousels';
 import Login from './pages/form/Login';
 import Register from './pages/form/Register';
 import BasicTable from './pages/table/BasicTable';
-import ReduxDemo from './pages/reduxdemo/reduxdemo'
+import ReduxDemo from './pages/reduxdemo/reduxdemo';
+
 
 export default class ERouter extends React.Component{
     render(){
