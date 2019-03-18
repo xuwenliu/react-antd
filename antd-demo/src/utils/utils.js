@@ -64,7 +64,7 @@ const pagination = (data,pageOrPageSizeChange) =>{
         pageSize:data.result.pageSize,
         total: data.result.totalCount,
         showTotal:()=>{
-            return `${data.result.pageSize}/${data.result.totalCount}条`
+            return `共${data.result.totalCount}条`
         },
         showQuickJumper: true,
         showSizeChanger: true,//是否可以改变 pageSize
