@@ -1,6 +1,8 @@
 
 //获取Action
-import ACTION_TYPES from './actionTypes'
+import ACTION_TYPES from './actionTypes';
+import axios from '../../../axios/axios';
+
 
 const getAction = {
     getInputChangeAction:((value) => {
@@ -24,6 +26,24 @@ const getAction = {
         return {
             type: ACTION_TYPES.INDEX_TITLE,
             title
+        }
+    }),
+    initActionData: ((data) => {
+        return {
+            type: ACTION_TYPES.INIT_ACTION_DATA,
+            data
+        }
+    }),
+    getInitActionData: ((callback) => {
+        return (dispatch) => {
+            axios.ajax({
+                url: '/user/list',
+            }).then((res) => {
+                if (res.code === 0) {
+                    dispatch(getAction.initActionData(res.result.list));
+                    callback && callback();
+                }
+            })
         }
     })
 

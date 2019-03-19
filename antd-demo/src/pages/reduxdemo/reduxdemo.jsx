@@ -1,20 +1,21 @@
 import React from 'react';
-import { Input,Button,List} from 'antd';
 import store from './store/store'
 import getAction from './actionCreators/getAction'
+import TodoListUI from './todoListUI';
+import { message } from 'antd';
 
+
+//容器组件，只用于逻辑处理
 export default class Name extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        }
+        this.state = {}
         store.subscribe(() => {
             this.setState(store.getState().todoListReducers)
         });
     }
 
     handleInputChange = (e) => {
-        console.log(store.getState().todoListReducers)
         store.dispatch(getAction.getInputChangeAction(e.target.value));
     }
     handleBtnAdd = () => {
@@ -24,31 +25,23 @@ export default class Name extends React.Component {
     }
     handleItemDelete = (index) => {
         store.dispatch(getAction.getTodoItemDeleteAction(index));
-
     }
   
     componentDidMount() {
-        this.setState(store.getState().todoListReducers);
+        //初始化 list 将ajax请求放到了getInitActionData中去处理了。
+        store.dispatch(getAction.getInitActionData(() => {
+            message.success('数据初始化成功');
+        }));
     }
 
     render() {
-        const { list,inputVal } = this.state;
         return (
-            <div>
-                <div style={{width:400}}>
-                    <Input value={inputVal} onChange={this.handleInputChange} style={{width: 300}} placeholder="请输入item" />
-                    <Button onClick={this.handleBtnAdd} type="primary">添加</Button>
-                </div>
-                <List
-                    style={{width:300}}
-                    bordered
-                    dataSource={list}
-                    renderItem={(item,index) => (<List.Item onClick={()=>this.handleItemDelete(index)} key={index}>{item}</List.Item>)}
-                />
-
-               
-            </div>
-           
+            <TodoListUI
+                {...this.state}
+                handleInputChange={this.handleInputChange}
+                handleBtnAdd={this.handleBtnAdd}
+                handleItemDelete = {this.handleItemDelete}
+            />
         )
     }
 

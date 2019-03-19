@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Table, Avatar,Badge,Tooltip, Button,Radio,Modal,notification,Form,Switch }from 'antd';
 import moment from 'moment';
-import axios from '../../axios/index';
+import axios from '../../axios/axios';
 import Utils from '../../utils/utils';
 const FormItem = Form.Item;
 
@@ -126,7 +126,8 @@ export default class HightTable extends React.Component {
             {
                 title:'年龄',
                 key:'age',
-                dataIndex:'age'
+                dataIndex: 'age',
+                sorter: (a, b) => a.age - b.age
             },
             {
                 title:'角色',

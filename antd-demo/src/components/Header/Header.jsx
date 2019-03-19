@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col} from 'antd'
 import './header.less'
 import Util from '../../utils/utils'
-import axios from '../../axios'
+import axios from '../../axios/axios'
 import store from '../../pages/reduxdemo/store/store';
 
 

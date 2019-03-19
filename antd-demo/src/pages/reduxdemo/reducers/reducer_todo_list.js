@@ -4,6 +4,13 @@ import ACTION_TYPES from '../actionCreators/actionTypes';
 
 const handleState = new Map([
     [
+        { type: ACTION_TYPES.INIT_ACTION_DATA },
+        (state, action) => {
+            state.list = action.data.map(({ userName }) => userName);
+            return state;
+        }
+    ],
+    [
         { type: ACTION_TYPES.TODOLIST_VALUE_CHANGE },
         (state, action) => {
             state.inputVal = action.value;
