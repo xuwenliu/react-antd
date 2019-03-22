@@ -1,7 +1,7 @@
 //reducer 合并
 import { combineReducers } from 'redux';
-import todoListReducers from '../reducers/reducer_todo_list';
-import titleReducers from '../reducers/reducer_title';
+import todoListReducers from './reducer_todo_list';
+import titleReducers from './reducer_title';
 
 let rootReducers = combineReducers({
     titleReducers,

@@ -17,7 +17,8 @@ import Register from './pages/form/Register';
 import BasicTable from './pages/table/BasicTable';
 import HightTable from './pages/table/HightTable';
 
-import ReduxDemo from './pages/reduxdemo/reduxdemo';
+import ReduxThunkDemo from './pages/redux-thunk-demo/redux-thunk-demo';
+import ReduxSagaDemo from './pages/redux-saga-demo/redux-saga-demo';
 
 
 export default class ERouter extends React.Component{
@@ -47,7 +48,8 @@ export default class ERouter extends React.Component{
                                     
 
 
-                                    <Route path="/reduxdemo" component={ReduxDemo}></Route>
+                                    <Route path="/redux/thunk" component={ReduxThunkDemo}></Route>
+                                    <Route path="/redux/saga" component={ReduxSagaDemo}></Route>
 
                                     
                                     <Redirect to="/home" />

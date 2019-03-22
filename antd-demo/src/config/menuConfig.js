@@ -123,7 +123,18 @@ const menuList = [
     },
     {
         title: 'Redux demo',
-        key: '/reduxdemo'
+        key: '/redux',
+        children: [
+            {
+                title: 'redux-thunk',
+                key: '/redux/thunk'
+            },
+            {
+                title: 'redux-saga',
+                key: '/redux/saga'
+            },
+            
+        ]
     },
 ];
 export default menuList;
