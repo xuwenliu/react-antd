@@ -19,6 +19,7 @@ import HightTable from './pages/table/HightTable';
 
 import ReduxThunkDemo from './pages/redux-thunk-demo/redux-thunk-demo';
 import ReduxSagaDemo from './pages/redux-saga-demo/redux-saga-demo';
+import ReduxReactTodoList from './pages/redux-react-todoList/redux-react-todoList';
 
 
 export default class ERouter extends React.Component{
@@ -50,6 +51,7 @@ export default class ERouter extends React.Component{
 
                                     <Route path="/redux/thunk" component={ReduxThunkDemo}></Route>
                                     <Route path="/redux/saga" component={ReduxSagaDemo}></Route>
+                                    <Route path="/redux/react/todolist" component={ReduxReactTodoList}></Route>
 
                                     
                                     <Redirect to="/home" />

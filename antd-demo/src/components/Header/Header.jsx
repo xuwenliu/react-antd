@@ -2,22 +2,19 @@ import React from 'react';
 import { Row, Col} from 'antd'
 import './header.less'
 import Util from '../../utils/utils'
-import axios from '../../axios/axios'
-import store from '../../pages/reduxdemo/store/store';
+import axios from '../../axios/axios';
+import { connect } from 'react-redux'
 
 
 
-export default class Header extends React.Component {
+
+class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             userName: '',
             date: Util.filterDate(new Date()),
-            title:store.getState().titleReducers.title
         }
-        store.subscribe(() => {
-            this.setState(store.getState().titleReducers);
-        })
     }
     //组件即将挂载-->render函数还未执行
     componentWillMount() {
@@ -57,7 +54,7 @@ export default class Header extends React.Component {
                 </Row>
                 <Row className="breadcrumb">
                     <Col span={4} className="breadcrumb-title">
-                        {this.state.title}
+                        {this.props.title}
                     </Col>
                     <Col span={20} className="weather">
                         <span className="date">{this.state.date}</span>
@@ -76,3 +73,11 @@ export default class Header extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        title: state.titleReducers.title
+    }
+}
+
+export default connect(mapStateToProps,null)(Header);

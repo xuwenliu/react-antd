@@ -3,9 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import ERouter from './router';
+import { Provider } from 'react-redux';
+import store from './pages/redux-react-todoList/store/store';
 
-
-ReactDOM.render(<ERouter />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider
+        store = {store}
+    >
+        <ERouter />
+    </Provider>, 
+    document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -133,6 +133,10 @@ const menuList = [
                 title: 'redux-saga',
                 key: '/redux/saga'
             },
+            {
+                title: 'react-redux-todolist',
+                key: '/redux/react/todolist',
+            }
             
         ]
     },

@@ -2,15 +2,17 @@ import React from 'react';
 import MenuConfig from '../../config/menuConfig';
 import { Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
-import './navLeft.less'
-import store from '../../pages/reduxdemo/store/store';
-import getAction from '../../pages/reduxdemo/actionCreators/getAction';
+import './navLeft.less';
+import { connect } from 'react-redux'
+
+// import store from '../../pages/redux-thunk-demo/store/store';
+import getAction from '../../pages/redux-thunk-demo/actionCreators/getAction';
 
 
 const SubMenu = Menu.SubMenu;
 
 
-export default class NavLeft extends React.Component {
+class NavLeft extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,7 +30,8 @@ export default class NavLeft extends React.Component {
 
     }
     componentDidMount() {
-        store.dispatch(getAction.getIndexTitleAction('首页'));
+        // store.dispatch(getAction.getIndexTitleAction('首页'));
+        // this.props.dispatch();
     }
 
     handleClick = ({item,key})=>{
@@ -42,7 +45,7 @@ export default class NavLeft extends React.Component {
                 currentKey:key
             }
         })
-        store.dispatch(getAction.getIndexTitleAction(item.props.title));
+        this.props.dispatch(getAction.getIndexTitleAction(item.props.title));
     }   
 
     //菜单渲染
@@ -79,3 +82,5 @@ export default class NavLeft extends React.Component {
         )
     }
 }
+
+export default connect()(NavLeft);
