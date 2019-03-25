@@ -65,7 +65,7 @@ class Header extends React.Component {
                             <img src={this.state.dayPictureUrl} alt="" />
                         </span>
                         <span className="weather-detail">
-                            {this.state.weather}
+                            {this.state.weather}{this.state.temperature}
                         </span>
                     </Col>
                 </Row>

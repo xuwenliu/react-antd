@@ -17,8 +17,8 @@ let defaultState = {
 }
 
 export default ((state = defaultState, action) => {
-    // let newState = JSON.parse(JSON.stringify(state)); //深拷贝 state
-    let newState = { ...state };//深拷贝 state
+    let newState = JSON.parse(JSON.stringify(state)); //深拷贝 state
+    // let newState = { ...state };//深拷贝 state
     
     [...handleState].map(([key, func]) => {
         if (key.type && key.type === action.type) {

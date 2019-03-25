@@ -41,7 +41,7 @@ export default class Axios {
                 }
                 if (response.status === 200){
                     let res = response.data;
-                    if (res.data.code === 0){
+                    if (res.data.code == 0){
                         resolve(res.data);
                     }else{
                         Modal.info({
