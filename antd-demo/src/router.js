@@ -17,6 +17,9 @@ import Register from './pages/form/Register';
 import BasicTable from './pages/table/BasicTable';
 import HightTable from './pages/table/HightTable';
 import City from './pages/city/city';
+import Order from './pages/order/Order';
+import OrderDetail from './pages/order/OrderDetail';
+import Common from './common';
 
 
 
@@ -31,7 +34,12 @@ export default class ERouter extends React.Component{
             <HashRouter>
                 <App>
                     <Switch>
-                        {/* <Route path="/login" component={Login}></Route> */}
+                        <Route path="/login" component={Login}></Route>
+                        <Route path="/common" render={() =>
+                            <Common>
+                                <Route path="/common/order/detail/:orderId" component={OrderDetail}></Route>
+                            </Common>
+                        }></Route>
                         <Route path="/" render={()=>
                             <Admin>
                                 <Switch>
@@ -49,6 +57,7 @@ export default class ERouter extends React.Component{
                                     <Route path="/table/basic" component={BasicTable}></Route>
                                     <Route path="/table/hight" component={HightTable}></Route>
                                     <Route path="/city" component={City}></Route>
+                                    <Route path="/order" component={Order}></Route>
 
                                     
 

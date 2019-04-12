@@ -32,11 +32,31 @@ class NavLeft extends React.Component {
     componentDidMount() {
         // store.dispatch(getAction.getIndexTitleAction('首页'));
         // this.props.dispatch();
+        let key = window.location.hash.replace(/#|\?.*$/g,'');
+        this.setState(()=>{
+            return {
+                currentKey:key
+            }
+        })
+        //每次刷新浏览器就触发一次action
+        this.renderTitle(MenuConfig,key);
+       
+
+    }
+
+    renderTitle = (data,key) => {
+        data.map(item => {
+            if (item.key === key) {
+                this.props.dispatch(getAction.getIndexTitleAction(item.title));
+                return;
+            } 
+            if (item.children) {
+                this.renderTitle(item.children,key);
+            } 
+        })
     }
 
     handleClick = ({item,key})=>{
-        console.log(item)
-        console.log(key)
         if (key === this.state.currentKey) {
             return false;
         }
@@ -75,6 +95,7 @@ class NavLeft extends React.Component {
                 </div>
                 <Menu 
                     onClick={this.handleClick}
+                    selectedKeys={[this.state.currentKey]}
                     theme='dark'>
                     {this.state.menuTreeNode}
                 </Menu>

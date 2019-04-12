@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form, Select, Button, Table, message, Modal, Radio, notification  } from 'antd';
+import { Card, Form, Select, Button, Table, message, Modal, Radio, notification } from 'antd';
 import axios from '../../axios/axios';
 import Utils from './../../utils/utils';
 import moment from 'moment';
@@ -9,54 +9,54 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 const cityIdArr = [
-    {id:'',name:'全部'},
-    {id:1,name:'北京'},
-    {id:2,name:'上海'},
-    {id:3,name:'广州'},
-    {id:4,name:'深圳'},
-    {id:5,name:'成都'}
+    { id: '', name: '全部' },
+    { id: 1, name: '北京' },
+    { id: 2, name: '上海' },
+    { id: 3, name: '广州' },
+    { id: 4, name: '深圳' },
+    { id: 5, name: '成都' }
 ]
 
 const modeArr = [
-    {id:'',name:'全部'},
-    {id:1,name:'指定停车点模式'},
-    {id:2,name:'禁停区模式'},
+    { id: '', name: '全部' },
+    { id: 1, name: '指定停车点模式' },
+    { id: 2, name: '禁停区模式' },
 ]
 const opModeArr = [
-    {id:'',name:'全部'},
-    {id:1,name:'自营'},
-    {id:2,name:'加盟'},
+    { id: '', name: '全部' },
+    { id: 1, name: '自营' },
+    { id: 2, name: '加盟' },
 ]
 const authStatusArr = [
-    {id:'',name:'全部'},
-    {id:1,name:'已授权'},
-    {id:2,name:'未授权'},
+    { id: '', name: '全部' },
+    { id: 1, name: '已授权' },
+    { id: 2, name: '未授权' },
 ]
-export default class City extends React.Component{
-    constructor(props){
+export default class City extends React.Component {
+    constructor(props) {
         super(props);
         this.state = {
-            isShowOpenCityModal:false,
+            isShowOpenCityModal: false,
         };
     }
     params = {
         page: 1,
-        pageSize:10,
+        pageSize: 10,
     }
 
     getList() {
         let _this = this;
         axios.ajax({
             url: '/open/city',
-            data:this.params
+            data: { ...this.params }
         }).then((res) => {
             let list = res.result.list.map((item, index) => {
                 item.key = index;
                 return item;
             });
             this.setState({
-                list:list,
-                pagination:Utils.pagination(res,(current)=>{
+                list: list,
+                pagination: Utils.pagination(res, (current) => {
                     _this.params.page = current;
                     _this.getList();
                 })
@@ -78,7 +78,7 @@ export default class City extends React.Component{
     handleOpenCity = () => {
         this.setState(() => {
             return {
-                isShowOpenCityModal:true
+                isShowOpenCityModal: true
             }
         })
     }
@@ -87,38 +87,38 @@ export default class City extends React.Component{
     openCitySubmit = () => {
         let cityInfo = this.cityForm.props.form.getFieldsValue();
         message.info(`开通城市所选数据：${JSON.stringify(cityInfo)}`);
-        setTimeout(()=>{
-            this.setState(()=>{
+        setTimeout(() => {
+            this.setState(() => {
                 return {
-                    isShowOpenCityModal:false
+                    isShowOpenCityModal: false
                 }
             })
             notification.success({
-                message:'提示',
+                message: '提示',
                 description: '开通成功',
             })
-        },3000)
+        }, 3000)
     }
 
     render() {
         const columns = [
             {
-                title:'城市ID',
+                title: '城市ID',
                 dataIndex: 'id',
+                width: 80,
+            },
+            {
+                title: '城市名称',
+                dataIndex: 'name',
                 width: 135,
             },
             {
-                title:'城市名称',
-                dataIndex: 'name',
-                width:135,
-            },
-            {
-                title:'用车模式',
-                dataIndex:'mode',
+                title: '用车模式',
+                dataIndex: 'mode',
                 render: (mode) => {
-                    return mode ==1 ?'停车点':'禁停区';
+                    return mode == 1 ? '停车点' : '禁停区';
                 },
-                width:135,
+                width: 135,
             },
             {
                 title: '营运模式',
@@ -126,22 +126,22 @@ export default class City extends React.Component{
                 render(op_mode) {
                     return op_mode == 1 ? '自营' : '加盟';
                 },
-                width:135,
+                width: 100,
             },
             {
                 title: '授权加盟商',
                 dataIndex: 'franchisee_name',
-                width:135,
+                width: 135,
             },
             {
                 title: '城市管理员',
                 dataIndex: 'city_admins',
-                render(arr){
-                    return arr.map((item)=>{
+                render(arr) {
+                    return arr.map((item) => {
                         return item.user_name;
                     }).join(',');
                 },
-                width:135,
+                width: 150,
             },
             {
                 title: '城市开通时间',
@@ -149,7 +149,7 @@ export default class City extends React.Component{
                 render: (open_time) => {
                     return moment(open_time * 1000).format("YYYY-MM-DD HH:mm:ss");
                 },
-                width:135,
+                width: 200,
             },
             {
                 title: '操作时间',
@@ -157,7 +157,7 @@ export default class City extends React.Component{
                 render: (update_time) => {
                     return moment(update_time * 1000).format("YYYY-MM-DD HH:mm:ss");
                 },
-                width:135,
+                width: 200,
             },
             {
                 title: '操作人',
@@ -165,11 +165,11 @@ export default class City extends React.Component{
             }
         ]
 
-        columns.map((item,index) => {
+        columns.map((item, index) => {
             item.align = "center";
         })
 
-        
+
 
 
         return (
@@ -179,16 +179,16 @@ export default class City extends React.Component{
                         search={this.search}
                     />
                 </Card>
-                <Card style={{marginTop:20}}>
+                <Card style={{ marginTop: 20 }}>
                     <Button type="primary" onClick={this.handleOpenCity}>开通城市</Button>
                 </Card>
                 <div className="content-wrap">
-                    <Table 
+                    <Table
                         bordered
                         columns={columns}
                         dataSource={this.state.list}
                         pagination={this.state.pagination}
-                        scroll={{y: 350}}
+                        scroll={{ y: 350 }}
                     />
                 </div>
                 <Modal
@@ -197,21 +197,21 @@ export default class City extends React.Component{
                     onCancel={() => {
                         this.setState(() => {
                             return {
-                                isShowOpenCityModal:false
+                                isShowOpenCityModal: false
                             }
                         })
                         this.cityForm.props.form.resetFields();
                     }}
                     onOk={this.openCitySubmit}
                 >
-                    <OpenCityFormModal wrappedComponentRef={ (open)=> {this.cityForm = open;}}/>
+                    <OpenCityFormModal wrappedComponentRef={(open) => { this.cityForm = open; }} />
                 </Modal>
             </div>
         )
     }
 }
 
-class FilterForm extends React.Component{
+class FilterForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -233,18 +233,18 @@ class FilterForm extends React.Component{
         this.props.form.resetFields();
     }
 
-    render(){
+    render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form layout="inline">
                 <FormItem label="城市">
                     {
-                        getFieldDecorator('city_id',{
-                            initialValue:''
+                        getFieldDecorator('city_id', {
+                            initialValue: ''
                         })(
-                            <Select  style={{width:135}}>
+                            <Select style={{ width: 135 }}>
                                 {
-                                    cityIdArr.map((item,index)=>{
+                                    cityIdArr.map((item, index) => {
                                         return <Option key={item.id} value={item.id}>{item.name}</Option>
                                     })
                                 }
@@ -254,12 +254,12 @@ class FilterForm extends React.Component{
                 </FormItem>
                 <FormItem label="用车模式">
                     {
-                        getFieldDecorator('mode',{
-                            initialValue:''
+                        getFieldDecorator('mode', {
+                            initialValue: ''
                         })(
-                            <Select style={{width:140}}>
+                            <Select style={{ width: 140 }}>
                                 {
-                                    modeArr.map((item,index)=>{
+                                    modeArr.map((item, index) => {
                                         return <Option key={item.id} value={item.id}>{item.name}</Option>
                                     })
                                 }
@@ -271,12 +271,12 @@ class FilterForm extends React.Component{
 
                 <FormItem label="运营模式">
                     {
-                        getFieldDecorator('op_mode',{
-                            initialValue:''
+                        getFieldDecorator('op_mode', {
+                            initialValue: ''
                         })(
-                            <Select style={{width:100}}>
+                            <Select style={{ width: 100 }}>
                                 {
-                                    opModeArr.map((item,index)=>{
+                                    opModeArr.map((item, index) => {
                                         return <Option key={item.id} value={item.id}>{item.name}</Option>
                                     })
                                 }
@@ -287,12 +287,12 @@ class FilterForm extends React.Component{
 
                 <FormItem label="加盟商授权状态">
                     {
-                        getFieldDecorator('auth_status',{
-                            initialValue:''
+                        getFieldDecorator('auth_status', {
+                            initialValue: ''
                         })(
-                            <Select style={{width:100}}>
+                            <Select style={{ width: 100 }}>
                                 {
-                                    authStatusArr.map((item,index)=>{
+                                    authStatusArr.map((item, index) => {
                                         return <Option key={item.id} value={item.id}>{item.name}</Option>
                                     })
                                 }
@@ -301,7 +301,7 @@ class FilterForm extends React.Component{
                     }
                 </FormItem>
                 <FormItem>
-                    <Button onClick={this.search} type="primary" icon="search" style={{margin:'0 10px'}}>搜索</Button>
+                    <Button onClick={this.search} type="primary" icon="search" style={{ margin: '0 10px' }}>搜索</Button>
                     <Button onClick={this.reset}>重置</Button>
                 </FormItem>
 
@@ -315,15 +315,15 @@ FilterForm = Form.create({})(FilterForm);
 
 
 
-class OpenCityFormModal extends React.Component{
+class OpenCityFormModal extends React.Component {
 
     render() {
         const formItemLayout = {
-            labelCol:{
-                span:5
+            labelCol: {
+                span: 5
             },
-            wrapperCol:{
-                span:19
+            wrapperCol: {
+                span: 19
             }
         }
         const { getFieldDecorator } = this.props.form;
@@ -333,12 +333,12 @@ class OpenCityFormModal extends React.Component{
                 <FormItem label="选择城市" {...formItemLayout}>
                     {
                         getFieldDecorator('city_id', {
-                            initialValue:1,
+                            initialValue: 1,
                         })(
                             <Select style={{ width: 100 }}>
                                 {
-                                    cityIdArr.filter((item, index) => index > 0).map((item) =>{
-                                        return <Option key={item.id} value={item.id}>{item.name}</Option>   
+                                    cityIdArr.filter((item, index) => index > 0).map((item) => {
+                                        return <Option key={item.id} value={item.id}>{item.name}</Option>
                                     })
                                 }
                             </Select>
@@ -349,16 +349,16 @@ class OpenCityFormModal extends React.Component{
                 <FormItem label="运营模式" {...formItemLayout}>
                     {
                         getFieldDecorator('op_mode', {
-                            initialValue:1,
+                            initialValue: 1,
                         })(
-                           <Radio.Group>
-                               {
-                                   opModeArr.filter((item,index)=>index>0).map((item)=>{
-                                       return <Radio key={item.id} value={item.id}>{item.name}</Radio>
-                                   })
-                               }
+                            <Radio.Group>
+                                {
+                                    opModeArr.filter((item, index) => index > 0).map((item) => {
+                                        return <Radio key={item.id} value={item.id}>{item.name}</Radio>
+                                    })
+                                }
 
-                           </Radio.Group>
+                            </Radio.Group>
                         )
                     }
                 </FormItem>
@@ -366,16 +366,16 @@ class OpenCityFormModal extends React.Component{
                 <FormItem label="用车模式" {...formItemLayout}>
                     {
                         getFieldDecorator('use_mode', {
-                            initialValue:1,
+                            initialValue: 1,
                         })(
-                           <Radio.Group>
-                               {
-                                   modeArr.filter((item,index)=>index>0).map((item)=>{
-                                       return <Radio key={item.id} value={item.id}>{item.name}</Radio>
-                                   })
-                               }
+                            <Radio.Group>
+                                {
+                                    modeArr.filter((item, index) => index > 0).map((item) => {
+                                        return <Radio key={item.id} value={item.id}>{item.name}</Radio>
+                                    })
+                                }
 
-                           </Radio.Group>
+                            </Radio.Group>
                         )
                     }
                 </FormItem>
