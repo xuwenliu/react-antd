@@ -88,3 +88,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ### less配置在webpack.config.js
 `getStyleLoaders 方法添加第三个参数`
 
+
+### yarn build 后执行下面命令可以访问打包后的项目
+` yarn global add serve
+  serve -s build
+`
+

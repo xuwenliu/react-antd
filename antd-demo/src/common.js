@@ -14,11 +14,11 @@ class Common extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <Row className="simple-page">
                     <Header menuType="second"></Header>
                 </Row>
-                <Row className="content">
+                <Row className="content" style={{marginTop:54}}>
                     {this.props.children}
                 </Row>
             </div>

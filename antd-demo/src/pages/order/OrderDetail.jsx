@@ -3,6 +3,16 @@ import { Card } from 'antd';
 import axios from '../../axios/axios';
 import './detail.less'
 
+
+function* getInfo(orderId) {
+    yield axios.ajax({
+            url: '/order/detail',
+            data: {
+                orderId,
+            }
+        })
+}
+
 export default class OrderDetail extends React.Component{
     constructor(props) {
         super(props)
@@ -14,13 +24,10 @@ export default class OrderDetail extends React.Component{
         let orderId = this.props.match.params.orderId * 1;
         this.getOrderDetailInfo(orderId);
     }
+
     getOrderDetailInfo = (orderId) => {
-        axios.ajax({
-            url: '/order/detail',
-            data: {
-                orderId,
-            }
-        }).then((res) => {
+        let order = getInfo(orderId).next().value;
+        order.then((res) => {
             if (res.code === 0) {
                 this.setState({
                     orderInfo: res.result
@@ -28,6 +35,20 @@ export default class OrderDetail extends React.Component{
                 this.renderMap(res.result);
             }
         })
+
+        // axios.ajax({
+        //     url: '/order/detail',
+        //     data: {
+        //         orderId,
+        //     }
+        // }).then((res) => {
+        //     if (res.code === 0) {
+        //         this.setState({
+        //             orderInfo: res.result
+        //         })
+        //         this.renderMap(res.result);
+        //     }
+        // })
     }
 
     renderMap = (result)=>{
@@ -109,7 +130,7 @@ export default class OrderDetail extends React.Component{
         const orderInfo = this.state.orderInfo;
         return (
             <div>
-                <Card>
+                <Card title="订单详情">
                     <div id="orderDetailMap" className="order-map"></div>
                     <div className="detail-items">
                         <div className="item-title">基础信息</div>

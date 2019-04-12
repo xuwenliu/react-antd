@@ -13,6 +13,7 @@
         "babel-loader": "8.0.4",
         "babel-plugin-import": "^1.11.0",
         "babel-plugin-named-asset-import": "^0.3.0",
+        "babel-plugin-transform-es2015-classes": "6.1.4",
         "babel-preset-react-app": "^7.0.0",
         "bfj": "6.1.1",
         "case-sensitive-paths-webpack-plugin": "2.1.2",
@@ -119,20 +120,6 @@
             "web.jsx",
             "jsx",
             "node"
-        ]
-    },
-    "babel": {
-        "presets": [
-            "react-app"
-        ],
-        "plugins": [
-            [
-                "import",
-                {
-                    "libraryName": "antd",
-                    "style": true
-                }
-            ]
         ]
     }
 }
