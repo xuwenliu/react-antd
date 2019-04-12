@@ -67,7 +67,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-### 按需加载antd组件样式配置在packag.json
+### 按需加载antd组件样式配置在packag.json---移步到.babelrc文件
 `
     "babel": {
         "presets": [
@@ -90,7 +90,19 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 ### yarn build 后执行下面命令可以访问打包后的项目
-` yarn global add serve
-  serve -s build
-`
+    yarn global add serve
+    serve -s build 本地访问打包后的页面
+
+
+### 项目部署到  [https://xuwenliu.github.io/react-antd](https://xuwenliu.github.io/react-antd)
+    1.安装gh-pages
+        npm install gh-pages --save-dev
+    2.package.json 添加     
+        "homepage":"https://xuwenliu.github.io/react-antd",
+    3.package.json script里面 添加     
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d build"
+    4.yarn run deploy
+
+    5.参考链接 [https://blog.csdn.net/Que_Li/article/details/80566111](https://blog.csdn.net/Que_Li/article/details/80566111)
 
