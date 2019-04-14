@@ -27,18 +27,36 @@ export default class Axios {
 
         let baseURL = 'https://www.easy-mock.com/mock/5c83123e23107a1da64ea2fb/api';
         return new Promise((resolve, reject) => {
-            axios({
-                url: options.url,
-                method: options.method || 'get',
-                baseURL,
-                tiemout: 5000,
-                params: options.params || '',
+            console.log(options)
+            let postData = {};
 
-            }).then((response) => {
-                if (options.isShowLoading !==false) {
+            if (options.params) { //get 请求
+                postData = {
+                    url: options.url,
+                    method:'get',
+                    baseURL,
+                    tiemout: 5000,
+                    params: options.params || ''
+    
+                }
+            }
+
+            if (options.data) {//post 请求
+                postData = {
+                    url: options.url,
+                    method: options.method || 'post',
+                    baseURL,
+                    tiemout: 5000,
+                    data: options.data || null
+                }
+            }
+
+            axios(postData).then((response) => {
+                if (options.isShowLoading !== false) {
                     loading = document.getElementById('ajaxLoading');
                     loading.style.display = 'none';
                 }
+
                 if (response.status === 200){
                     let res = response.data;
                     if (res.data.code == 0){

@@ -7,7 +7,7 @@ import './detail.less'
 function* getInfo(orderId) {
     yield axios.ajax({
             url: '/order/detail',
-            data: {
+            params: {
                 orderId,
             }
         })

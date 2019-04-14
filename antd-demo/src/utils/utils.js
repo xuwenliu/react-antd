@@ -1,5 +1,7 @@
-// import React from 'react';
-// import {Button} from 'antd';
+import React from 'react';
+import { Select } from 'antd';
+const Option = Select.Option;
+
 const filterDate = (date, fmt = 'YYYY-MM-DD HH:mm:ss') => {
     if (!date) {
         return '';
@@ -72,7 +74,26 @@ const pagination = (data,pageOrPageSizeChange) =>{
     }
 }
 
+const getOptions = (data, key, value) => {
+    if (!data) {
+        return [];
+    }
+    let options = [];
+    let option = '';
+    data.map((item, index) => {
+        if (key && value) {
+            option = <Option key={item[value]} value={item[value]}>{item[key]}</Option>;
+        } else {
+            option = <Option key={index} value={item}>{item}</Option>;
+        }
+
+        options.push(option);
+    })
+    return options;
+}
+
 export default {
     filterDate,
-    pagination
+    pagination,
+    getOptions
 }

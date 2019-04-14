@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Form, Select, Button, Table, message, Modal, Radio, notification } from 'antd';
+import FilterForm from '../../components/filterForm/FilterForm';
+
 import axios from '../../axios/axios';
 import Utils from './../../utils/utils';
 import moment from 'moment';
@@ -27,11 +29,7 @@ const opModeArr = [
     { id: 1, name: '自营' },
     { id: 2, name: '加盟' },
 ]
-const authStatusArr = [
-    { id: '', name: '全部' },
-    { id: 1, name: '已授权' },
-    { id: 2, name: '未授权' },
-]
+
 export default class City extends React.Component {
     constructor(props) {
         super(props);
@@ -48,7 +46,7 @@ export default class City extends React.Component {
         let _this = this;
         axios.ajax({
             url: '/open/city',
-            data: { ...this.params }
+            params:this.params
         }).then((res) => {
             let list = res.result.list.map((item, index) => {
                 item.key = index;
@@ -70,8 +68,12 @@ export default class City extends React.Component {
 
     //搜索-用选择的数据发请求
     search = (postData) => {
-        console.log('postData', postData)
-        message.info(`提交的搜索条件：${JSON.stringify(postData)}`)
+        this.params = {
+            ...this.params,
+            ...postData
+        }
+        message.info(`提交的搜索条件：${JSON.stringify(this.params)}`);
+        this.getList();
     }
 
     //开通城市按钮-显示Modal
@@ -169,6 +171,96 @@ export default class City extends React.Component {
             item.align = "center";
         })
 
+        const filterList = [
+            {
+                type: 'select',
+                label: '城市',
+                field: 'city',
+                placeholder: '请选择城市',
+                width: 135,
+                initialValue: '',
+                showSearch: true,
+                key: 'name',
+                value:'id',
+                list: [
+                    { id: '', name: '全部' },
+                    { id: 1, name: '北京' },
+                    { id: 2, name: '上海' },
+                    { id: 3, name: '广州' },
+                    { id: 4, name: '深圳' },
+                    { id: 5, name: '成都' }
+                ]
+            },
+            {
+                type: 'select',
+                label: '用车模式',
+                field: 'mode',
+                placeholder: '请选择用车模式',
+                width: 140,
+                initialValue: '',
+                showSearch: true,
+                key: 'name',
+                value:'id',
+                list: [
+                    { id: '', name: '全部' },
+                    { id: 1, name: '指定停车点模式' },
+                    { id: 2, name: '禁停区模式' },
+                ]
+            },
+            {
+                type: 'select',
+                label: '营运模式',
+                field: 'op_mode',
+                placeholder: '请选择营运模式',
+                initialValue: '',
+                showSearch: true,
+                key: 'name',
+                value:'id',
+                list: [
+                    { id: '', name: '全部' },
+                    { id: 1, name: '自营' },
+                    { id: 2, name: '加盟' },
+                ]
+            },
+            {
+                type: 'select',
+                label: '加盟商授权状态',
+                field: 'auth_status',
+                placeholder: '请选择加盟商授权状态',
+                initialValue: '',
+                showSearch: true,
+                key: 'name',
+                value:'id',
+                list: [
+                    { id: '', name: '全部' },
+                    { id: 1, name: '已授权' },
+                    { id: 2, name: '未授权' },
+                ]
+            },
+            // {
+            //     type: 'input',
+            //     inputType:'number',
+            //     label: '账号',
+            //     field: 'account',
+            //     placeholder: '请输入账号',
+            //     width:150,
+            //     initialValue: '',
+            //     allowClear:true,
+            // },
+            // {
+            //     type: 'checkbox',
+            //     label: '精确',
+            //     field: 'isMatch',
+            // },
+            // {
+            //     type: 'timeSelect',
+            //     label: '注册时间',
+            //     format:'YYYY-MM-DD',
+            //     width:200,
+            // },
+
+        ]
+
 
 
 
@@ -176,6 +268,7 @@ export default class City extends React.Component {
             <div>
                 <Card>
                     <FilterForm
+                        filterList={filterList}
                         search={this.search}
                     />
                 </Card>
@@ -210,109 +303,6 @@ export default class City extends React.Component {
         )
     }
 }
-
-class FilterForm extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    //搜索
-    search = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log(values)
-                this.props.search(values);
-            }
-        })
-    }
-
-    //重置
-    reset = () => {
-        this.props.form.resetFields();
-    }
-
-    render() {
-        const { getFieldDecorator } = this.props.form;
-        return (
-            <Form layout="inline">
-                <FormItem label="城市">
-                    {
-                        getFieldDecorator('city_id', {
-                            initialValue: ''
-                        })(
-                            <Select style={{ width: 135 }}>
-                                {
-                                    cityIdArr.map((item, index) => {
-                                        return <Option key={item.id} value={item.id}>{item.name}</Option>
-                                    })
-                                }
-                            </Select>
-                        )
-                    }
-                </FormItem>
-                <FormItem label="用车模式">
-                    {
-                        getFieldDecorator('mode', {
-                            initialValue: ''
-                        })(
-                            <Select style={{ width: 140 }}>
-                                {
-                                    modeArr.map((item, index) => {
-                                        return <Option key={item.id} value={item.id}>{item.name}</Option>
-                                    })
-                                }
-                            </Select>
-                        )
-                    }
-                </FormItem>
-
-
-                <FormItem label="运营模式">
-                    {
-                        getFieldDecorator('op_mode', {
-                            initialValue: ''
-                        })(
-                            <Select style={{ width: 100 }}>
-                                {
-                                    opModeArr.map((item, index) => {
-                                        return <Option key={item.id} value={item.id}>{item.name}</Option>
-                                    })
-                                }
-                            </Select>
-                        )
-                    }
-                </FormItem>
-
-                <FormItem label="加盟商授权状态">
-                    {
-                        getFieldDecorator('auth_status', {
-                            initialValue: ''
-                        })(
-                            <Select style={{ width: 100 }}>
-                                {
-                                    authStatusArr.map((item, index) => {
-                                        return <Option key={item.id} value={item.id}>{item.name}</Option>
-                                    })
-                                }
-                            </Select>
-                        )
-                    }
-                </FormItem>
-                <FormItem>
-                    <Button onClick={this.search} type="primary" icon="search" style={{ margin: '0 10px' }}>搜索</Button>
-                    <Button onClick={this.reset}>重置</Button>
-                </FormItem>
-
-            </Form>
-        )
-    }
-}
-
-FilterForm = Form.create({})(FilterForm);
-
-
 
 
 class OpenCityFormModal extends React.Component {

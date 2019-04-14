@@ -50,7 +50,7 @@ export default class HightTable extends React.Component {
     getList = () => {
         axios.ajax({
             url: '/user/list',
-            params: this.params,
+            params: this.params
         }).then((res) => {
             console.log('res', res);
             let _this = this;

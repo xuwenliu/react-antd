@@ -4,23 +4,12 @@ import axios from '../../axios/axios';
 import Utils from './../../utils/utils';
 import moment from 'moment';
 
+import FilterForm from '../../components/filterForm/FilterForm';
+
+
+
 const FormItem = Form.Item;
 const Option = Select.Option;
-const cityIdArr = [
-    { id: '', name: '全部' },
-    { id: 1, name: '北京' },
-    { id: 2, name: '上海' },
-    { id: 3, name: '广州' },
-    { id: 4, name: '深圳' },
-    { id: 5, name: '成都' }
-]
-const orderStatusArr = [
-    { id: '', name: '全部' },
-    { id: 1, name: '进行中' },
-    { id: 2, name: '进行中(临时锁车)' },
-    { id: 3, name: '行程结束' }
-]
-
 
 export default class Order extends React.Component {
     constructor(props) {
@@ -45,10 +34,12 @@ export default class Order extends React.Component {
 
     //搜索-用选择的数据发请求
     search = (postData) => {
-        postData.startTime = moment(postData.startTime).unix();
-        postData.endTime = moment(postData.endTime).unix();
-        console.log('postData', postData)
-        message.info(`提交的搜索条件：${JSON.stringify(postData)}`)
+        this.params = {
+            ...this.params,
+            ...postData
+        }
+        message.info(`提交的搜索条件：${JSON.stringify(this.params)}`);
+        this.getList();
     }
 
     componentDidMount() {
@@ -115,8 +106,8 @@ export default class Order extends React.Component {
     getOrderInfo = (item) => {
         axios.ajax({
             url: '/order/finish/info',
-            data: {
-                orderId:item.orderId
+            params: {
+                orderId:item.id
             }
         }).then((res) => {
             if (res.code === 0) {
@@ -131,9 +122,7 @@ export default class Order extends React.Component {
     getList = () => {
         axios.ajax({
             url: '/order/list',
-            data: {
-                ...this.params
-            }
+            params:this.params
         }).then((res) => {
             let _this = this;
             if (res.code === 0) {
@@ -218,10 +207,54 @@ export default class Order extends React.Component {
             wrapperCol:{span:19}
         }
 
+        const filterList = [
+            {
+                type: 'select',
+                label: '城市',
+                field: 'city',
+                placeholder: '请选择城市',
+                width: 135,
+                initialValue: '',
+                showSearch: true,
+                key: 'name',
+                value:'id',
+                list: [
+                    { id: '', name: '全部' },
+                    { id: 1, name: '北京' },
+                    { id: 2, name: '上海' },
+                    { id: 3, name: '广州' },
+                    { id: 4, name: '深圳' },
+                    { id: 5, name: '成都' }
+                ]
+            },
+            {
+                type: 'timeSelect',
+                label: '订单时间',
+                width: 200,
+            },
+            {
+                type: 'select',
+                label: '订单状态',
+                field: 'orderStatus',
+                placeholder: '请选择订单状态',
+                width: 135,
+                key: 'name',
+                value:'id',
+                list: [
+                    { id: '', name: '全部' },
+                    { id: 1, name: '进行中' },
+                    { id: 2, name: '进行中(临时锁车)' },
+                    { id: 3, name: '行程结束' }
+                ]
+            },
+        ]
+
         return (
             <div>
                 <Card>
-                    <FilterForm search={this.search} />
+                    <FilterForm
+                        filterList={filterList}
+                        search={this.search} />
                 </Card>
                 <Card style={{marginTop:20}}>
                     <Button type="primary" disabled={this.state.orderDetailBtnDisabled} onClick={this.orderDetail}>订单详情</Button>
@@ -275,88 +308,3 @@ export default class Order extends React.Component {
 }
 
 
-
-class FilterForm extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    //搜索
-    search = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log(values)
-                this.props.search(values);
-            }
-        })
-    }
-
-
-    render() {
-        const { getFieldDecorator } = this.props.form;
-        return (
-            <Form layout="inline">
-                <FormItem label="城市">
-                    {
-                        getFieldDecorator('city', {
-                            initialValue: '',
-                        })(
-                            <Select style={{ width: 135 }}>
-                                {
-                                    cityIdArr.map((item, index) => {
-                                        return <Option value={item.id} key={item.id}>{item.name}</Option>
-                                    })
-                                }
-
-                            </Select>
-                        )
-                    }
-                </FormItem>
-                <FormItem>
-                    {
-                        getFieldDecorator('startTime', {
-                            initialValue:null
-                        })(
-                            <DatePicker showTime={true} style={{ width: 200 }} format="YYYY-MM-DD HH:mm:ss" placeholder="请选择开始时间" />
-                        )
-                    }
-                </FormItem>
-                <FormItem label="~" colon={false} >
-                    {
-                        getFieldDecorator('endTime', {
-                            initialValue:null
-                        })(
-                            <DatePicker showTime={true} style={{ width: 200 }} format="YYYY-MM-DD HH:mm:ss" placeholder="请选择结束时间" />
-                        )
-                    }
-                </FormItem>
-
-                <FormItem label="订单状态">
-                    {
-                        getFieldDecorator('orderStatus', {
-                            initialValue: '',
-                        })(
-                            <Select style={{ width: 135 }}>
-                                {
-                                    orderStatusArr.map((item, index) =>
-                                        <Option value={item.id} key={item.id}>{item.name}</Option>
-                                    )
-                                }
-
-                            </Select>
-                        )
-                    }
-                </FormItem>
-
-                <FormItem>
-                    <Button onClick={this.search} type="primary" icon="search" style={{ margin: '0 10px' }}>搜索</Button>
-                    <Button onClick={() => this.props.form.resetFields()}>重置</Button>
-                </FormItem>
-
-            </Form>
-        )
-    }
-}
-FilterForm = Form.create({})(FilterForm);
