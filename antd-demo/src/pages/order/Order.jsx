@@ -120,28 +120,8 @@ export default class Order extends React.Component {
     }
 
     getList = () => {
-        axios.ajax({
-            url: '/order/list',
-            params:this.params
-        }).then((res) => {
-            let _this = this;
-            if (res.code === 0) {
-                let list = res.result.list.map((item, index) => {
-                    item.key = index;
-                    return item;
-                })
-                this.setState({
-                    list,
-                    pagination:Utils.pagination(res,(current)=>{
-                        _this.params.page = current;
-                        _this.getList();
-                    })
-                })
-            }
-        })
+        axios.getList(this,'/order/list',this.params);
     }
-
-   
 
     render() {
         const columns = [

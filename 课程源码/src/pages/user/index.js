@@ -64,7 +64,7 @@ export default class User extends React.Component{
             this.setState({
                 title:type=='edit'?'编辑用户':'查看详情',
                 isVisible:true,
-                userInfo:item,
+                userInfo: item,
                 type
             })
         }else if(type=="delete"){

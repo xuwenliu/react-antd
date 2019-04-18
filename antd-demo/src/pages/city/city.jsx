@@ -42,24 +42,10 @@ export default class City extends React.Component {
         pageSize: 10,
     }
 
+    
+
     getList() {
-        let _this = this;
-        axios.ajax({
-            url: '/open/city',
-            params:this.params
-        }).then((res) => {
-            let list = res.result.list.map((item, index) => {
-                item.key = index;
-                return item;
-            });
-            this.setState({
-                list: list,
-                pagination: Utils.pagination(res, (current) => {
-                    _this.params.page = current;
-                    _this.getList();
-                })
-            })
-        })
+        axios.getList(this,'/open/city',this.params);
     }
 
     componentDidMount() {

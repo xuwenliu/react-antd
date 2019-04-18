@@ -1,6 +1,7 @@
 import JsonP from 'jsonp';
 import axios from 'axios';
 import { Modal } from 'antd';
+import utils from '../utils/utils';
 
 
 export default class Axios {
@@ -14,6 +15,26 @@ export default class Axios {
                 } else {
                     reject(res.msssage);
                 }
+            })
+        })
+    }
+
+    static getList(_this,url, params){
+        this.ajax({
+            url,
+            params
+        }).then((res) => {
+            let list = res.result.list.map((item, index) => {
+                item.key = index;
+                return item;
+            });
+            _this.setState({
+                list,
+                pagination: utils.pagination(res, (page,pageSize) => {
+                    _this.params.page = page;
+                    _this.params.pageSize = pageSize;
+                    _this.getList();
+                })
             })
         })
     }

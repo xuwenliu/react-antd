@@ -4,7 +4,7 @@ import utils from '../../utils/utils';
 import moment from 'moment';
 
 const FormItem = Form.Item;
-
+const Option = Select.Option;
 class FilterForm extends React.Component{
     constructor(props) {
         super(props);
@@ -75,11 +75,11 @@ class FilterForm extends React.Component{
                                     initialValue:initialValue
                                 })(
                                     <Select
+                                        key={field}
                                         style={{ width }}
                                         placeholder={placeholder}
                                         showSearch={showSearch}
                                         mode={mode}
-
                                     >
                                         { utils.getOptions(list,key,value)}
                                     </Select>

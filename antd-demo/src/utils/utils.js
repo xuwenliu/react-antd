@@ -92,8 +92,9 @@ const getOptions = (data, key, value) => {
     return options;
 }
 
+
 export default {
     filterDate,
     pagination,
-    getOptions
+    getOptions,
 }

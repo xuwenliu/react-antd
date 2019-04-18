@@ -19,6 +19,8 @@ import HightTable from './pages/table/HightTable';
 import City from './pages/city/city';
 import Order from './pages/order/Order';
 import OrderDetail from './pages/order/OrderDetail';
+import User from './pages/user/User';
+import BikeMap from './pages/map/BikeMap';
 import Common from './common';
 
 
@@ -58,6 +60,8 @@ export default class ERouter extends React.Component{
                                     <Route path="/table/hight" component={HightTable}></Route>
                                     <Route path="/city" component={City}></Route>
                                     <Route path="/order" component={Order}></Route>
+                                    <Route path="/user" component={User}></Route>
+                                    <Route path="/bikeMap" component={BikeMap}></Route>
 
                                     
 
