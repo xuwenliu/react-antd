@@ -21,6 +21,11 @@ import Order from './pages/order/Order';
 import OrderDetail from './pages/order/OrderDetail';
 import User from './pages/user/User';
 import BikeMap from './pages/map/BikeMap';
+import Bar from './pages/echarts/bar/Bar';
+import Pie from './pages/echarts/pie/Pie';
+import Line from './pages/echarts/line/Line';
+
+
 import Common from './common';
 
 
@@ -62,9 +67,9 @@ export default class ERouter extends React.Component{
                                     <Route path="/order" component={Order}></Route>
                                     <Route path="/user" component={User}></Route>
                                     <Route path="/bikeMap" component={BikeMap}></Route>
-
-                                    
-
+                                    <Route path="/charts/bar" component={Bar}></Route>
+                                    <Route path="/charts/pie" component={Pie}></Route>
+                                    <Route path="/charts/line" component={Line}></Route>
 
                                     <Route path="/redux/thunk" component={ReduxThunkDemo}></Route>
                                     <Route path="/redux/saga" component={ReduxSagaDemo}></Route>
