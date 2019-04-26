@@ -105,5 +105,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
     4.yarn build
     5.yarn run deploy
 
-    5.参考链接 [https://blog.csdn.net/Que_Li/article/details/80566111](https://blog.csdn.net/Que_Li/article/details/80566111)
+    5.参考链接 
+    [https://blog.csdn.net/Que_Li/article/details/80566111](https://blog.csdn.net/Que_Li/article/details/80566111)
+
+    
 

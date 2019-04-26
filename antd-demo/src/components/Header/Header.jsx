@@ -48,7 +48,7 @@ class Header extends React.Component {
                     {
                         menuType ?
                             <Col span={6} className="logo">
-                                <img src="/assets/img/me.jpeg" alt="" />
+                                <img src="{{ site.baseurl }}/assets/img/me.jpeg" alt="" />
                                 <span>heng 通用管理系统</span>
                             </Col> : ''
                     }
