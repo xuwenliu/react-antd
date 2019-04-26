@@ -14,12 +14,10 @@ function* getInfo(orderId) {
 }
 
 export default class OrderDetail extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            orderInfo: {}
-        }
+    state = {
+        orderInfo: {}
     }
+
     componentDidMount() {
         let orderId = this.props.match.params.orderId * 1;
         this.getOrderDetailInfo(orderId);

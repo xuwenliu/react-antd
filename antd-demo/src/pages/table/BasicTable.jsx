@@ -5,14 +5,11 @@ import axios from './../../axios/axios';
 import Utils from './../../utils/utils';
 
 export default class BasicTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dataSource: [],
-            selectedRowKeys: [],
-            loading: false,
-            actionMode: 'radio',
-        }
+    state = {
+        dataSource: [],
+        selectedRowKeys: [],
+        loading: false,
+        actionMode: 'radio',
     }
 
     params = {

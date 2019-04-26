@@ -1,13 +1,7 @@
 import React from 'react';
 
 export default class Topic extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
-    
+    state = {};
     render() {
         return (
             <div>

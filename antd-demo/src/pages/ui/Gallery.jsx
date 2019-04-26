@@ -2,12 +2,11 @@ import React from 'react';
 import { Row,Col,Card,Modal } from 'antd';
 
 export default class Gallery extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visible: false,
-            currentImg:''
-        }
+
+
+    state = {
+        visible: false,
+        currentImg:''
     }
 
     openGallery = (imgUrl) => {

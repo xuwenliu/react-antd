@@ -3,12 +3,9 @@ import { Card,Spin,Radio, Icon,Alert,Switch } from 'antd';
 import './ui.less';
 
 export default class Loadings extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            size: 'default',
-            loading:true,
-        }
+    state = {
+        size: 'default',
+        loading:true,
     }
 
     handleChangeSize = (e)=>{

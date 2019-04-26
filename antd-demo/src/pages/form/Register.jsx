@@ -3,12 +3,9 @@ import { Card, Form, Input, Button, Icon, message, Radio, InputNumber, Select, S
 import moment from 'moment';
 
 class Register extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userImg: '',//头像
-            loading:false,
-        }
+    state = {
+        userImg: '',//头像
+        loading:false,
     }
 
 
@@ -312,6 +309,7 @@ class Register extends React.Component {
                             {
                                 getFieldDecorator('isMarried', {
                                     initialValue: false,
+                                    valuePropName:'checked'
                                 })(
                                     <Switch checkedChildren="是" unCheckedChildren="否" />
                                 )

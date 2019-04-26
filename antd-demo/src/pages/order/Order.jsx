@@ -12,18 +12,15 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 export default class Order extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            list: [],//列表数据
-            pagination:()=>{},//分页
-            selectedRowKeys: [],//选择列表index数组 单选就是类似：[0]
-            selectedItem: {},//选中列表项
-            isShowFinishOrderModal: false,//是否显示结束订单弹框
-            orderInfo: {},//结束订单弹框详情
-            finishOrderBtnDisabled: true,
-            orderDetailBtnDisabled:true,
-        }
+    state = {
+        list: [],//列表数据
+        pagination:()=>{},//分页
+        selectedRowKeys: [],//选择列表index数组 单选就是类似：[0]
+        selectedItem: {},//选中列表项
+        isShowFinishOrderModal: false,//是否显示结束订单弹框
+        orderInfo: {},//结束订单弹框详情
+        finishOrderBtnDisabled: true,
+        orderDetailBtnDisabled:true,
     }
 
     params = {

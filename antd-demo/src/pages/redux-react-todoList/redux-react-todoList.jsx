@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 
 class ReduxReactTodoList extends React.Component{
    
-    constructor(props) {
-        super(props);
-    }
-
     // componentDidMount() {
     //     const action = getAction.getListData();
     //     store.dispatch(action);

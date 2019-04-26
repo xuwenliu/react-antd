@@ -9,12 +9,9 @@ import { connect } from 'react-redux'
 
 
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userName: '',
-            date: Util.filterDate(new Date()),
-        }
+    state = {
+        userName: '',
+        date: Util.filterDate(new Date()),
     }
     //组件即将挂载-->render函数还未执行
     componentWillMount() {
@@ -30,7 +27,7 @@ class Header extends React.Component {
     }
 
     getWeatherAPIData = () => {
-        let city = "苍溪";
+        let city = "成都";
         axios.jsonp({
             url: `https://api.map.baidu.com/telematics/v3/weather?location=${encodeURIComponent(city)}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`
         }).then((res) => {
@@ -51,7 +48,7 @@ class Header extends React.Component {
                     {
                         menuType ?
                             <Col span={6} className="logo">
-                                <img src="/assets/img/logo-ant.svg" alt="" />
+                                <img src="/assets/img/me.jpeg" alt="" />
                                 <span>heng 通用管理系统</span>
                             </Col> : ''
                     }

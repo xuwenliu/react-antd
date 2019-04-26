@@ -23,6 +23,7 @@ const interestSelectList = [
 ]
 
 export default class User extends React.Component {
+    
     state = {
         actionBtndisabled: true,//
         deleteVisible: false,//删除强提示

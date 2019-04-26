@@ -31,12 +31,10 @@ const opModeArr = [
 ]
 
 export default class City extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isShowOpenCityModal: false,
-        };
-    }
+   
+    state = {
+        isShowOpenCityModal: false,
+    };
     params = {
         page: 1,
         pageSize: 10,

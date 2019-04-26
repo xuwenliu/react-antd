@@ -9,15 +9,12 @@ const scrollY = { y: 300 };
 const scrollX = { x: 1300 };
 
 export default class HightTable extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dataSource: [],
-            selectedRowKeys: [],
-            loading: false,
-            scrollY: undefined,
-            scrollX: undefined,
-        }
+    state = {
+        dataSource: [],
+        selectedRowKeys: [],
+        loading: false,
+        scrollY: undefined,
+        scrollX: undefined,
     }
 
     params = {

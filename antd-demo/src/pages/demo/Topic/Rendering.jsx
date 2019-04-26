@@ -1,12 +1,7 @@
 import React from 'react';
 
 export default class Rendering extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
+    state = {};
     
     render() {
         return (

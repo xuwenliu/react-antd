@@ -3,12 +3,7 @@ import React from 'react';
 import { Card,Carousel} from 'antd';
 
 export default class Carousels extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
+    state = {};
 
     afterChange = (currentIndex)=>{
         console.log('afterChange--currentIndex->',currentIndex)

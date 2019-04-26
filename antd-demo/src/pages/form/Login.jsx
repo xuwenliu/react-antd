@@ -11,12 +11,8 @@ function hasErrors(fieldsError) {
   
 
 class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
+   
+    state = {};
 
     componentDidMount() {
         this.props.form.validateFields();

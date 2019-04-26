@@ -3,12 +3,8 @@ import { Card, Button, message } from 'antd';
 import './ui.less';
 
 export default class Messages extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        }
-    }
 
+    state = {};
     /**
      * 第一个参数，提示内容
      * 第二个参数，自动关闭的延时，单位秒。设为 0 时不自动关闭。

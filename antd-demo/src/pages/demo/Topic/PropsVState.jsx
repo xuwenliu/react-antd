@@ -2,12 +2,7 @@
 import React from 'react';
 
 export default class PropsVState extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
+    state = {};
     
     render() {
         return (

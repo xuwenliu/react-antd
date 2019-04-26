@@ -13,12 +13,9 @@ const SubMenu = Menu.SubMenu;
 
 
 class NavLeft extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            menuList: [],
-            currentKey:'',
-        }
+    state = {
+        menuList: [],
+        currentKey:'',
     }
 
     //组件即将挂载-->render函数还未执行
@@ -90,7 +87,7 @@ class NavLeft extends React.Component {
         return (
             <div>
                 <div className="logo">
-                    <img src="/assets/img/logo-ant.svg" alt="" />
+                    <img src="/assets/img/me.jpeg" alt="" />
                     <h1>heng Sys</h1>
                 </div>
                 <Menu 

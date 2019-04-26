@@ -7,13 +7,7 @@ import NavLeft from './components/NavLeft/NavLeft'
 import { connect } from 'react-redux'
 
 class Admin extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
-
+    state = {};
     render() {
         return (
             <div>

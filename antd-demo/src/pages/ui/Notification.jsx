@@ -3,12 +3,9 @@ import { Card,Button,notification,Select } from 'antd';
 import './ui.less';
 
 export default class Notification extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            size: 'default',
-            loading:true,
-        }
+    state = {
+        size: 'default',
+        loading:true,
     }
 
     handleOpen = (type) => {

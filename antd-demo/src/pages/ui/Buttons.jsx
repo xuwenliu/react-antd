@@ -6,12 +6,10 @@ import './ui.less';
 
 
 export default class Buttons extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            loading:true,
-            size:'default'
-        }
+    
+    state={
+        loading:true,
+        size:'default'
     }
     //不显示loading
     handleCloseLoading = ()=>{

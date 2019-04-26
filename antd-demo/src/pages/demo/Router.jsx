@@ -7,12 +7,7 @@ import Page404 from './Page404';
 
 
 export default class Router extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
+    state = {};
     
     render() {
         return (

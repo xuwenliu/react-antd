@@ -6,9 +6,7 @@ import moment from 'moment';
 const FormItem = Form.Item;
 const Option = Select.Option;
 class FilterForm extends React.Component{
-    constructor(props) {
-        super(props);
-    }
+    state = {};
 
     search = () => {
         let data = this.props.filterList;

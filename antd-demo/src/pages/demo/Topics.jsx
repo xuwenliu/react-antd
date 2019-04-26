@@ -6,13 +6,7 @@ import PropsVState from './Topic/PropsVState';
 import Rendering from './Topic/Rendering';
 
 export default class Topics extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-        console.log(this.props.match)
-    }
+    state = {};
     
     render() {
         return (

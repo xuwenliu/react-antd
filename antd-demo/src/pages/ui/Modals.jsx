@@ -6,17 +6,14 @@ import './ui.less';
 
 
 export default class Modals extends React.Component{
-    constructor(){
-        super();
-        this.state={
-            visible0: false,
-            visible1: false,
-            visible2: false,
-            visible3: false,
-            visible4: false,
-            ModalText:"我是5s自动关闭弹框",
-            visible4confirmLoading:false,
-        }
+    state={
+        visible0: false,
+        visible1: false,
+        visible2: false,
+        visible3: false,
+        visible4: false,
+        ModalText:"我是5s自动关闭弹框",
+        visible4confirmLoading:false,
     }
 
     openBaseModal = (visible) => {
