@@ -29,8 +29,8 @@ export default class Carousels extends React.Component {
                 <Card title="图片轮播" className="slider-wrap">
                     <Carousel autoplay afterChange={this.afterChange} beforeChange={this.beforeChange}>
                         <div><img src="/react-antd/assets/img/carousel-img/carousel-1.jpg" alt=""/></div>
-                        <div><img src="{{ site.baseurl }}/assets/img/carousel-img/carousel-2.jpg" alt=""/></div>
-                        <div><img src="{{ site.baseurl }}/assets/img/carousel-img/carousel-3.jpg" alt=""/></div>
+                        <div><img src="/assets/img/carousel-img/carousel-2.jpg" alt=""/></div>
+                        <div><img src="/assets/img/carousel-img/carousel-3.jpg" alt=""/></div>
                     </Carousel>
                 </Card>
             </div>
