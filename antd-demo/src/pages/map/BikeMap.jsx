@@ -3,6 +3,7 @@ import React from 'react';
 import { Card } from 'antd';
 import FilterForm from '../../components/filterForm/FilterForm';
 import Axios from '../../axios/axios';
+import Utils from '../../utils/utils';
 
 export default class BikeMap extends React.Component{
     state = {}
@@ -37,7 +38,7 @@ export default class BikeMap extends React.Component{
         this.map.centerAndZoom(endPoint, 11);
         
         //添加起始图标
-        let startPointIcon = new window.BMap.Icon("/assets/img/start_point.png", new window.BMap.Size(36, 42), {
+        let startPointIcon = new window.BMap.Icon(`${Utils.cdnUrl}/assets/img/start_point.png`, new window.BMap.Size(36, 42), {
             imageSize: new window.BMap.Size(36, 42),
             anchor: new window.BMap.Size(18, 42)
         });
@@ -45,7 +46,7 @@ export default class BikeMap extends React.Component{
         this.map.addOverlay(bikeMarkerStart);
 
         //添加结束图标
-        let endPointIcon = new window.BMap.Icon("/assets/img/end_point.png", new window.BMap.Size(36, 42), {
+        let endPointIcon = new window.BMap.Icon(`${Utils.cdnUrl}/assets/img/end_point.png`, new window.BMap.Size(36, 42), {
             imageSize: new window.BMap.Size(36, 42),
             anchor: new window.BMap.Size(18, 42)
         });
@@ -84,7 +85,7 @@ export default class BikeMap extends React.Component{
 
         //添加地图中的自行车
         let bikeList = data.bikeList;
-        let bikeIcon = new window.BMap.Icon("/assets/img/bike.jpg", new window.BMap.Size(36, 42), {
+        let bikeIcon = new window.BMap.Icon(`${Utils.cdnUrl}/assets/img/bike.jpg`, new window.BMap.Size(36, 42), {
             imageSize: new window.BMap.Size(36, 42),
             anchor: new window.BMap.Size(18, 42)
         });

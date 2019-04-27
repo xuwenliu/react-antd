@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card } from 'antd';
 import axios from '../../axios/axios';
-import './detail.less'
+import './detail.less';
+import Utils from '../../utils/utils';
+
 
 
 function* getInfo(orderId) {
@@ -70,7 +72,7 @@ export default class OrderDetail extends React.Component{
             let last = positionList[positionList.length - 1];
             startPoint = new window.BMap.Point(first.lon, first.lat);
             endPoint = new window.BMap.Point(last.lon, last.lat);
-            let startIcon = new window.BMap.Icon('/assets/img/start_point.png',
+            let startIcon = new window.BMap.Icon(`${Utils.cdnUrl}/assets/img/start_point.png`,
                 new window.BMap.Size(36, 42),
                 {
                     imageSize: new window.BMap.Size(36, 42),
@@ -81,7 +83,7 @@ export default class OrderDetail extends React.Component{
             this.map.addOverlay(startMarker);
 
             //终点
-            let endIcon = new window.BMap.Icon('/assets/img/end_point.png',
+            let endIcon = new window.BMap.Icon(`${Utils.cdnUrl}/assets/img/end_point.png`,
             new window.BMap.Size(36, 42),
                 {
                     imageSize: new window.BMap.Size(36, 42),

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col} from 'antd'
 import './header.less'
-import Util from '../../utils/utils'
+import Utils from '../../utils/utils'
 import axios from '../../axios/axios';
 import { connect } from 'react-redux'
 
@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 class Header extends React.Component {
     state = {
         userName: '',
-        date: Util.filterDate(new Date()),
+        date: Utils.filterDate(new Date()),
     }
     //组件即将挂载-->render函数还未执行
     componentWillMount() {
@@ -20,7 +20,7 @@ class Header extends React.Component {
         })
         setInterval(() => {
             this.setState({
-                date: Util.filterDate(new Date())
+                date: Utils.filterDate(new Date())
             })
         }, 1000)
         this.getWeatherAPIData();
@@ -48,7 +48,7 @@ class Header extends React.Component {
                     {
                         menuType ?
                             <Col span={6} className="logo">
-                                <img src="{{ site.baseurl }}/assets/img/me.jpeg" alt="" />
+                                <img src={`${Utils.cdnUrl}/assets/img/me.png`} alt="" />
                                 <span>heng 通用管理系统</span>
                             </Col> : ''
                     }

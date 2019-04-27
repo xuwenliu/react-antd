@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row,Col,Card,Modal } from 'antd';
+import Utils from '../../utils/utils';
 
 export default class Gallery extends React.Component {
 
@@ -29,7 +30,7 @@ export default class Gallery extends React.Component {
                 <Card
                     key={item}
                     style={{ marginBottom: 10 }}
-                    cover={<img alt={item} src={'/assets/img/gallery/' + item} />}
+                    cover={<img alt={item} src={`${Utils.cdnUrl}/assets/img/gallery/` + item} />}
                     onClick={()=>this.openGallery(item)}
                    
                 >
