@@ -1,21 +1,22 @@
 import React from 'react';
-
+import Utils from '../../utils/utils';
 import { Card,Carousel} from 'antd';
 
 export default class Carousels extends React.Component {
     state = {};
 
     afterChange = (currentIndex)=>{
-        console.log('afterChange--currentIndex->',currentIndex)
+        // console.log('afterChange--currentIndex->',currentIndex)
     }
 
     beforeChange = (from,to) => {
-        console.log('beforeChange--from->',from)
-        console.log('beforeChange--to->',to)
+        // console.log('beforeChange--from->',from)
+        // console.log('beforeChange--to->',to)
         
     }
 
     render() {
+        console.log(Utils.cdnUrl)
         return (
             <div>
                 <Card title="文字背景轮播">
@@ -28,9 +29,9 @@ export default class Carousels extends React.Component {
 
                 <Card title="图片轮播" className="slider-wrap">
                     <Carousel autoplay afterChange={this.afterChange} beforeChange={this.beforeChange}>
-                        <div><img src="/assets/img/carousel-img/carousel-1.jpg" alt=""/></div>
-                        <div><img src="{{ post.url | absolute_url }}/assets/img/carousel-img/carousel-2.jpg" alt=""/></div>
-                        <div><img src="{{ 'react-antd' | relative_url }}/assets/img/carousel-img/carousel-3.jpg" alt=""/></div>
+                        <div><img src={`{{site.baseurl}}/assets/img/carousel-img/carousel-1.jpg`} alt=""/></div>
+                        <div><img src={`${Utils.cdnUrl}/assets/img/carousel-img/carousel-2.jpg`} alt=""/></div>
+                        <div><img src={`${Utils.cdnUrl}/assets/img/carousel-img/carousel-3.jpg`} alt=""/></div>
                     </Carousel>
                 </Card>
             </div>

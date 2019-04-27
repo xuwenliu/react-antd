@@ -92,9 +92,21 @@ const getOptions = (data, key, value) => {
     return options;
 }
 
+//设置打包部署到github 上图片404问题
+//https://xuwenliu.github.io/react-antd 线上地址
+//需要在本地图片链接前加上 /react-antd，而本地访问确不需要，则需要cdnUrl来区分
+
+let cdnUrl = '';
+let host = window.location.host;
+if (host === "xuwenliu.github.io") {
+    cdnUrl = '/react-antd';
+}
+
+
 
 export default {
     filterDate,
     pagination,
     getOptions,
+    cdnUrl
 }
