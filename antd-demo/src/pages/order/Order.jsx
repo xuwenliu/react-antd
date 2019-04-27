@@ -55,7 +55,7 @@ export default class Order extends React.Component {
     //订单详情
     orderDetail = () => {
         let orderId = this.state.selectedItem.id;
-        window.open(`/#/common/order/detail/${orderId}`,'_blank')
+        window.open(`${Utils.cdnUrl}/#/common/order/detail/${orderId}`,'_blank')
     }
 
     //结束订单 弹框

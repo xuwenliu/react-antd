@@ -1,5 +1,6 @@
 import React from 'react';
 import MenuConfig from '../../config/menuConfig';
+import Utils from '../../utils/utils';
 import { Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 import './navLeft.less';
@@ -87,7 +88,7 @@ class NavLeft extends React.Component {
         return (
             <div>
                 <div className="logo">
-                    <img src="/assets/img/me.jpeg" alt="" />
+                    <img src={`${Utils.cdnUrl}/assets/img/me.png`} alt="" />
                     <h1>heng Sys</h1>
                 </div>
                 <Menu 
