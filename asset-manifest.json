@@ -1,7 +1,7 @@
 {
   "main.css": "/react-antd/static/css/main.6269e58b.chunk.css",
-  "main.js": "/react-antd/static/js/main.3d17142b.chunk.js",
-  "main.js.map": "/react-antd/static/js/main.3d17142b.chunk.js.map",
+  "main.js": "/react-antd/static/js/main.f42c4591.chunk.js",
+  "main.js.map": "/react-antd/static/js/main.f42c4591.chunk.js.map",
   "static/css/1.4410feeb.chunk.css": "/react-antd/static/css/1.4410feeb.chunk.css",
   "static/js/1.aba5a590.chunk.js": "/react-antd/static/js/1.aba5a590.chunk.js",
   "static/js/1.aba5a590.chunk.js.map": "/react-antd/static/js/1.aba5a590.chunk.js.map",
@@ -10,6 +10,6 @@
   "static/css/1.4410feeb.chunk.css.map": "/react-antd/static/css/1.4410feeb.chunk.css.map",
   "static/css/main.6269e58b.chunk.css.map": "/react-antd/static/css/main.6269e58b.chunk.css.map",
   "index.html": "/react-antd/index.html",
-  "precache-manifest.9136edf0549a83fd38345a54297bf1e9.js": "/react-antd/precache-manifest.9136edf0549a83fd38345a54297bf1e9.js",
+  "precache-manifest.a50e04ee7dbb42efb97d196ede0e31ed.js": "/react-antd/precache-manifest.a50e04ee7dbb42efb97d196ede0e31ed.js",
   "service-worker.js": "/react-antd/service-worker.js"
 }
