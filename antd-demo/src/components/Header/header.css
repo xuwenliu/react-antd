@@ -1,0 +1,72 @@
+/** 常用色值 **/
+/** 常用字体大小 **/
+.header {
+  background-color: #ffffff;
+}
+.header .header-top {
+  height: 60px;
+  line-height: 60px;
+  padding: 0 20px;
+  text-align: right;
+}
+.header .header-top .logo {
+  line-height: 60px;
+  text-align: left;
+  font-size: 18px;
+}
+.header .header-top .logo img {
+  height: 40px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+.header .header-top .logo span {
+  margin-left: 5px;
+}
+.header .header-top a {
+  margin-left: 20px;
+}
+.header .breadcrumb {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  border-top: 1px solid #f9c700;
+}
+.header .breadcrumb .breadcrumb-title {
+  text-align: center;
+  position: relative;
+  font-size: 18px;
+}
+.header .breadcrumb .breadcrumb-title::after {
+  content: '';
+  position: absolute;
+  top: 39px;
+  left: 50%;
+  margin-left: -12px;
+  border-top: 9px solid #ffffff;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+}
+.header .breadcrumb .weather {
+  text-align: right;
+  font-size: 14px;
+}
+.header .breadcrumb .weather .date {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.header .breadcrumb .weather .weather-img img {
+  height: 15px;
+  vertical-align: middle;
+}
+.header .breadcrumb .weather .weather-city {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.header .breadcrumb .weather .weather-detail {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.simple-page .header-top {
+  background: #6699cc;
+  color: #ffffff;
+}

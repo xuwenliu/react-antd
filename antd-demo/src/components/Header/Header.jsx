@@ -36,7 +36,6 @@ class Header extends React.Component {
                 city:res.results[0].currentCity,
                 ...data
             })
-            console.log(res)
         })
     }
 
@@ -49,7 +48,7 @@ class Header extends React.Component {
                         menuType ?
                             <Col span={6} className="logo">
                                 <img src={`${Utils.cdnUrl}/assets/img/me.png`} alt="" />
-                                <span>heng 通用管理系统</span>
+                                <span>react-antd管理系统</span>
                             </Col> : ''
                     }
                     <Col span={menuType ?18:24}>

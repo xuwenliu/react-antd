@@ -1,0 +1,16 @@
+.nav-left .logo {
+  line-height: 90px;
+  padding-left: 20px;
+  background-color: #002140;
+}
+.nav-left .logo img {
+  height: 35px;
+  border-radius: 50%;
+}
+.nav-left .logo h1 {
+  color: #fff;
+  font-size: 20px;
+  margin: 0 0 0 10px;
+  display: inline-block;
+  vertical-align: middle;
+}

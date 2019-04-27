@@ -8,7 +8,8 @@ import {
     Input,
     Switch,
     message,
-    Tree
+    Tree,
+    Transfer
 } from "antd";
 import axios from "../../axios/axios";
 import moment from "moment";
@@ -20,8 +21,9 @@ const TreeNode = Tree.TreeNode;
 export default class Permission extends React.Component {
     state = {
         btnDisabled: true,
-        isShowCreateModal: false,
-        isShowAuthModal: false //显示设置权限弹框
+        isShowCreateModal: false,//显示创建角色弹框
+        isShowAuthModal: false, //显示设置权限弹框
+        isShowUserAuthModal:false,//显示用户授权弹框
     };
     params = {
         page: 1,
@@ -36,6 +38,7 @@ export default class Permission extends React.Component {
         axios.getList(this, "/role/list", this.params);
     };
 
+    //点击表格每一行
     onRowClick = (item, index) => {
         this.setState({
             selectedRowKeys: [index],
@@ -44,12 +47,16 @@ export default class Permission extends React.Component {
         });
     };
 
+
+    /*创建角色*********************************************************************************************** */
+    //点击创建角色按钮
     handleCreate = () => {
         this.setState({
             isShowCreateModal: true
         });
     };
 
+    //创建角色-提交
     onCreateSubmit = () => {
         this.roleForm.props.form.validateFields((err, values) => {
             if (!err) {
@@ -72,6 +79,8 @@ export default class Permission extends React.Component {
         });
     };
 
+    /*置权限*********************************************************************************************** */
+    //点击设置权限按钮
     handleAuth = () => {
         let item = this.state.selectedItem;
         this.setState({
@@ -80,12 +89,14 @@ export default class Permission extends React.Component {
         });
     };
 
+    //设置树形选择的菜单key
     setMenus = menus => {
         this.setState({
             menus
         });
     };
 
+    //设置权限-提交
     onAuthSubmit = () => {
         this.authForm.props.form.validateFields((err, values) => {
             if (!err) {
@@ -109,6 +120,74 @@ export default class Permission extends React.Component {
             }
         });
     };
+
+    /*用户授权*********************************************************************************************** */
+    //点击用户授权按钮
+    handleUserAuth = () => {
+        let item = this.state.selectedItem;
+        this.setState({
+            isShowUserAuthModal: true,
+        });
+        this.getUserAuthList(item);
+    }
+
+    //获取用户权限列表
+    getUserAuthList = (item) => {
+        axios.ajax({
+            url: '/role/user/auth',
+            params: {
+                userId:item.id
+            }
+        }).then(res => {
+            if (res.code === 0) {
+                let data = res.result;
+                let mockData = [];
+                let targetKeys = [];
+                if (data && data.length > 0) {
+                    data.map(item => {
+                        let dataObj = {
+                            key: item.userId,
+                            title: item.userName,
+                            status:item.status,
+                        }
+                        if (item.status === 1) {
+                            targetKeys.push(dataObj.key)
+                        }
+                        mockData.push(dataObj);
+                    })
+                    console.log('mockData',mockData)
+                    this.setState({
+                        mockData,
+                        targetKeys
+                    })
+                }
+                
+            }
+        })
+    }
+
+    //用户授权-提交
+    onUserAuthSubmit = () => {
+        let data = {
+            roleId: this.state.selectedItem.id,
+            roleName:this.state.selectedItem.roleName,
+            userIds:this.state.targetKeys,
+        }
+        axios.ajax({
+            url:'/role/user/auth/edit',
+            data
+        }).then(res => {
+            if (res.code === 0){
+                message.success("设置成功!");
+                this.getList();
+                this.setState({
+                    isShowUserAuthModal: false,
+                    selectedItem: {}
+                });
+            }
+        })
+    }
+
 
     render() {
         const columns = [
@@ -145,7 +224,7 @@ export default class Permission extends React.Component {
                 dataIndex: "authorizeUserName"
             }
         ];
-        columns.map((item, index) => {
+        columns.map(item => {
             item.align = "center";
         });
 
@@ -169,7 +248,10 @@ export default class Permission extends React.Component {
                     >
                         设置权限
                     </Button>
-                    <Button type="primary" disabled={this.state.btnDisabled}>
+                    <Button
+                        type="primary"
+                        disabled={this.state.btnDisabled}
+                        onClick={this.handleUserAuth}>
                         用户授权
                     </Button>
                 </Card>
@@ -189,6 +271,8 @@ export default class Permission extends React.Component {
                         }}
                     />
                 </div>
+
+
                 <Modal
                     title="创建角色"
                     width={600}
@@ -206,13 +290,14 @@ export default class Permission extends React.Component {
                     />
                 </Modal>
 
+                
                 <Modal
+                    title="权限设置"
+                    width={600}
                     bodyStyle={{
                         height: 400,
                         overflow:'auto'
                     }}
-                    title="权限设置"
-                    width={600}
                     visible={this.state.isShowAuthModal}
                     onCancel={() => {
                         this.authForm.props.form.resetFields();
@@ -229,6 +314,33 @@ export default class Permission extends React.Component {
                         wrappedComponentRef={sss => (this.authForm = sss)}
                     />
                 </Modal>
+
+
+
+                <Modal
+                    title="用户授权"
+                    width={800}
+                    visible={this.state.isShowUserAuthModal}
+                    onCancel={() => {
+                        this.userAuthForm.props.form.resetFields();
+                        this.setState({
+                            isShowUserAuthModal: false
+                        });
+                    }}
+                    onOk={this.onUserAuthSubmit}
+                >
+                    <UserAuthForm
+                        info={this.state.selectedItem}
+                        mockData={this.state.mockData}
+                        targetKeys={this.state.targetKeys}
+                        setTargetKeys={(targetKeys) => {
+                            this.setState({targetKeys})
+                        }}
+                        wrappedComponentRef={sss => (this.userAuthForm = sss)}
+                    />
+                </Modal>
+
+
             </div>
         );
     }
@@ -338,3 +450,48 @@ class AuthForm extends React.Component {
     }
 }
 AuthForm = Form.create({})(AuthForm);
+
+
+
+class UserAuthForm extends React.Component {
+
+    handleChange = (targetKeys) => {
+        this.props.setTargetKeys(targetKeys);
+    }
+    render() {
+        const formItemLayout = {
+            labelCol: { span: 5 },
+            wrapperCol: { span: 19 }
+        };
+        const { getFieldDecorator } = this.props.form;
+        const { info, mockData, targetKeys } = this.props;
+        return (
+            <Form layout="horizontal">
+                <FormItem label="角色名称" {...formItemLayout}>
+                    {getFieldDecorator("roleName", {
+                        initialValue: info.roleName
+                    })(<Input placeholder="请输入角色名称" disabled />)}
+                </FormItem>
+                <FormItem label="选择用户" {...formItemLayout}>
+                    <Transfer
+                        dataSource={mockData}
+                        targetKeys={targetKeys}
+                        showSearch
+                        locale={{
+                            itemUnit: '名',
+                            itemsUnit: '名',
+                            searchPlaceholder: "请输入用户名",
+                            notFoundContent:'暂无用户'
+                        }}
+                        listStyle={{width: 200,height: 400}}
+                        titles={['待选用户', '已选用户']}
+                        render={item => item.title}
+                        onChange={this.handleChange}
+                    />
+                </FormItem>
+                
+            </Form>
+        );
+    }
+}
+UserAuthForm = Form.create({})(UserAuthForm);

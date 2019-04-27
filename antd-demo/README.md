@@ -67,8 +67,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-### 按需加载antd组件样式配置在packag.json---移步到.babelrc文件
-`
+### 1.按需加载antd组件样式配置在packag.json---移步到.babelrc文件
+```js
     "babel": {
         "presets": [
             "react-app"
@@ -83,18 +83,18 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
             ]
         ]
     }
-`
+```
 
-### less配置在webpack.config.js
+### 2.less配置在webpack.config.js
 `getStyleLoaders 方法添加第三个参数`
 
 
-### yarn build 后执行下面命令可以访问打包后的项目
+### 3.yarn build 后执行下面命令可以访问打包后的项目
     yarn global add serve
     serve -s build 本地访问打包后的页面
 
 
-### 项目部署到  [https://xuwenliu.github.io/react-antd](https://xuwenliu.github.io/react-antd)
+### 4.项目部署到  [https://xuwenliu.github.io/react-antd](https://xuwenliu.github.io/react-antd)
     1.安装gh-pages
         npm install gh-pages --save-dev
     2.package.json 添加     
@@ -105,8 +105,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
     4.yarn build
     5.yarn run deploy
 
-    5.参考链接 
-    [https://blog.csdn.net/Que_Li/article/details/80566111](https://blog.csdn.net/Que_Li/article/details/80566111)
+    5.参考链接 https://blog.csdn.net/Que_Li/article/details/80566111
+    
+
+### 5.本项目所有mock数据 https://www.easy-mock.com/project/5c83123e23107a1da64ea2fb
 
     
 

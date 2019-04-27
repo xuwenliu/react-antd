@@ -89,7 +89,7 @@ class NavLeft extends React.Component {
             <div>
                 <div className="logo">
                     <img src={`${Utils.cdnUrl}/assets/img/me.png`} alt="" />
-                    <h1>heng Sys</h1>
+                    <h1>Sys</h1>
                 </div>
                 <Menu 
                     onClick={this.handleClick}
