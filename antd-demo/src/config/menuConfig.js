@@ -140,5 +140,9 @@ const menuList = [
             
         ]
     },
+    {
+        title: '数据查询',
+        key: '/salary'
+    }
 ];
 export default menuList;

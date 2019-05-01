@@ -2,6 +2,10 @@ import React from 'react';
 import { Form, Select,Input,DatePicker,Checkbox,Button } from 'antd';
 import utils from '../../utils/utils';
 import moment from 'moment';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
+
+const { MonthPicker } = DatePicker;
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -23,6 +27,15 @@ class FilterForm extends React.Component{
                 } else {
                     searchData[start_time_field] = searchData[start_time_field]?searchData[start_time_field].format(formatStr):'';
                     searchData[end_time_field] = searchData[end_time_field]?searchData[end_time_field].format(formatStr):'';
+                }
+            }
+            if (item.type === 'timeSelectSingle') {
+                let formatStr = item.format || 'YYYY-MM-DD';
+                let start_time_field = item.startField || 'startTime';
+                if (!item.isUnTimeStamp) {
+                    searchData[start_time_field] = searchData[start_time_field]?moment(searchData[start_time_field]).unix():'';
+                } else {
+                    searchData[start_time_field] = searchData[start_time_field]?searchData[start_time_field].format(formatStr):'';
                 }
                 
             }
@@ -52,7 +65,7 @@ class FilterForm extends React.Component{
                 let inputType = item.inputType || 'text';//类型
 
                 //时间区间选择相关属性
-                let showTime = item.showTime || true;//时间选择 是否显示选择时分秒
+                let showTime = item.showTime?item.showTime:true;//时间选择 是否显示选择时分秒
                 let format = item.format || 'YYYY-MM-DD HH:mm:ss';
 
                 let startField = item.startField || 'startTime';
@@ -63,6 +76,8 @@ class FilterForm extends React.Component{
                 
                 let startPlaceholder = item.startPlaceholder || '开始时间';
                 let endPlaceholder = item.endPlaceholder || '结束时间';
+
+                let onChange = item.onChange || null;
 
 
                 switch (item.type) {
@@ -134,6 +149,42 @@ class FilterForm extends React.Component{
                         </FormItem>
                         formItems.push(endTime);
                         break;
+                    case 'timeSelectSingle':
+                        let startTimeSingle = '';
+                        if (format === 'YYYY-MM') {
+                            startTimeSingle= <FormItem label={label} key={startField}>
+                            {
+                                getFieldDecorator([startField], {
+                                    initialValue: initialValue,
+                                })(
+                                    <MonthPicker
+                                        style={{ width }}
+                                        showTime={showTime}
+                                        placeholder={placeholder}
+                                        format={format}
+                                        onChange={onChange}/>
+                                )
+                            }
+                        </FormItem>;
+                        } else {
+                            startTimeSingle = <FormItem label={label} key={startField}>
+                                {
+                                    getFieldDecorator([startField], {
+                                        initialValue: initialStartTime,
+                                    })(
+                                        <DatePicker
+                                            style={{ width }}
+                                            showTime={showTime}
+                                            placeholder={placeholder}
+                                            format={format} />
+                                    )
+                                }
+                            </FormItem>;
+                        }
+                        
+                        formItems.push(startTimeSingle);
+                        break;
+                    
                     case 'checkbox':
                     let checkbox = <FormItem key={field}>
                         {

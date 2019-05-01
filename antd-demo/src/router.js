@@ -25,7 +25,7 @@ import Bar from './pages/echarts/bar/Bar';
 import Pie from './pages/echarts/pie/Pie';
 import Line from './pages/echarts/line/Line';
 import Permission from './pages/permission/Permission';
-
+import Salary from './pages/salary/Salary';
 
 import Common from './common';
 
@@ -72,6 +72,8 @@ export default class ERouter extends React.Component{
                                     <Route path="/charts/pie" component={Pie}></Route>
                                     <Route path="/charts/line" component={Line}></Route>
                                     <Route path="/permission" component={Permission}></Route>
+                                    <Route path="/salary" component={Salary}></Route>
+                                    
 
                                     
                                     <Route path="/redux/thunk" component={ReduxThunkDemo}></Route>

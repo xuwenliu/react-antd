@@ -80,14 +80,23 @@ export default class Axios {
 
                 if (response.status === 200){
                     let res = response.data;
-                    if (res.data.code == 0){
-                        resolve(res.data);
-                    }else{
-                        Modal.info({
-                            title:"提示",
-                            content:res.data.msg
-                        })
+                    console.log('res', response)
+                    //请求的数据查询接口地址
+                    if (response.config.url === 'http://jx.1000phone.net/teacher.php/Api/studentJobData_month') {
+                        if (res){
+                            resolve(res);
+                        }
+                    } else {
+                        if (res.data.code === 0){
+                            resolve(res.data);
+                        }else{
+                            Modal.info({
+                                title:"提示",
+                                content:res.data.msg
+                            })
+                        }
                     }
+                    
                 }else{
                     reject(response.data);
                 }
